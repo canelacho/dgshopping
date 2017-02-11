@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+  <% include ../views/partials/head %>
+
+	<title><%= title %></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+
+<% include ../views/partials/header %>
+
+<main class="row">
+  <div class="row">
+    <div class="carousel carousel-slider center" data-indicators="true">
+      <!-- <div class="carousel-fixed-item center">
+        <a class="btn waves-effect white grey-text darken-text-2">button</a>
+      </div -->
+      <div class="carousel-item white-text img-carousel1" >
+        <h2 style="font-size: 45px;">Protector para Mandos</h2>
+        <p class="white-text" style="font-size: 25px; font-family: 'Indie Flower', cursive;">En diferentes colores!</p>
+      </div>
+      <div class="carousel-item white-text img-carousel2" >
+        <h2 style="font-size: 45px;">Gran variedad de productos</h2>
+        <p class="white-text" style="font-size: 25px; font-family: 'Indie Flower', cursive;">Para todas las marcas!</p>
+      </div>
+      <div class="carousel-item white-text img-carousel3">
+        <h2 style="font-size: 45px;">Materiales de Calidad</h2>
+        <p class="white-text" style="font-size: 25px; font-family: 'Indie Flower', cursive;">Duraderos</p>
+      </div>
+      <div class="carousel-item white-text img-carousel4" >
+        <h2 style="font-size: 45px;">Protección y Color</h2>
+        <p class="white-text" style="font-size: 25px; font-family: 'Indie Flower', cursive;">Que tus llaves hagan juego siempre!</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="row title-items">
+      <h3 class="col s12">PRODUCTOS DESTACADOS</h3>
+    </div>
+
+    <div class="row gallery-row">
+      
+      <a href="product">
+        <div class="col s12 m4 l3">
+          <div class="padre-watch-product">
+            <img class="responsive-img" src="/img/test1.jpg" alt="">
+            <span class="center-align watch-product">
+              Ver Detalle          
+            </span>
+          </div>
+          <div class="center-align info-product">
+            <span class="product-group">Covers de timón</span><br>
+            <span class="product-name">Unicolor Pink</span><br>
+            <span class="product-price">15.00 $</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="product">
+      <div class="col s12 m4 l3">
+        <div class="padre-watch-product">
+          <img class="responsive-img" src="/img/test4.jpg" alt="">
+          <span class="center-align watch-product">
+            Ver Detalle          
+          </span>
+        </div>
+        <div class="center-align info-product">
+          <span class="product-group">Covers de llave</span><br>
+          <span class="product-name">Sticker Frase</span><br>
+          <span class="product-price">9.00 $</span>
+        </div>
+      </div>
+      </a>
+
+      <a href="product">
+      <div class="col s12 m4 l3">
+        <div class="padre-watch-product">
+          <img class="responsive-img" src="/img/test3.jpg" alt="">
+          <span class="center-align watch-product">
+            Ver Detalle          
+          </span>
+        </div>
+        <div class="center-align info-product">
+          <span class="product-group">Covers de timón</span><br>
+          <span class="product-name">Unicolor Pink</span><br>
+          <span class="product-price">15.00 $</span>
+        </div>
+      </div>
+      </a>
+
+      <a href="product">
+      <div class="col s12 m4 l3">
+        <div class="padre-watch-product">
+          <img class="responsive-img" src="/img/test2.jpg" alt="">
+          <span class="center-align watch-product">
+            Ver Detalle          
+          </span>
+        </div>
+        <div class="center-align info-product">
+          <span class="product-group">Covers de timón</span><br>
+          <span class="product-name">Unicolor Blue</span><br>
+          <span class="product-price">14.00 $</span>
+        </div>
+      </div>
+      </a>
+
+    </div>
+
+
+  </div>
+
+  <div class="row parallax-container">
+    <div class="parallax"><img src="/img/contact3.jpg">
+    </div>
+  </div>
+
+  <div class="row contact-info">
+    <h5 class="center-align">PARA VENTAS AL MAYOR puedes contactarnos a través de: <a href="#modalContact" style="color:#4da197">contacto@dgshopping.com</a></h5>
+    <p class="center-align">HORARIO DE ATENCIÓN DE LUNES A VIERNES de 8 AM a 6 PM - SÁBADO DE 9 AM a 4 PM.</p>
+
+    <!-- Modal Trigger -->
+    <!-- <a class="modal-trigger waves-effect waves-light btn" href="#modalConta"><i class="material-icons right">contact_phone</i>Contacto</a> -->
+
+    <!-- Modal Structure -->
+    <div id="modalContact" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <h4>Contactanos!</h4>
+        <p>Completa tu información y envianos tus sugerencias, solicitudes ó comentarios y a la brevedad te estaresmos contactando</p>
+
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12 m6">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="icon_prefix" type="text" class="validate">
+                <label for="icon_prefix">Nombre y Apellido</label>
+              </div>
+              <div class="input-field col s12 m6">
+                <i class="material-icons prefix">phone</i>
+                <input id="icon_telephone" type="tel" class="validate">
+                <label for="icon_telephone">Teléfono</label>
+              </div>
+              <div class="input-field col s12 m6">
+                <i class="material-icons prefix">email</i>
+                <input id="icon_email" type="email" class="validate">
+                <label for="icon_email">e-mail</label>
+              </div>
+
+              <div class="input-field col s12">
+                <textarea id="msg" class="materialize-textarea"></textarea>
+                <label for="msg">Mesaje - Comentario - Consulta</label>
+              </div>
+
+            </div>
+          </form>
+        </div>
+
+        <p>Recuerda que tambien nos puedes contactar en nuestras redes sociales <a href="https://www.facebook.com/Dgshopping-664861123630342/?fref=ts"><i class="fa fa-facebook-official"></i> Dgshopping</a> / <a href="https://www.instagram.com/dgshoppingpty/"><i class="fa fa-instagram" ></i> dgshoppingpty </a> ó a través de nuestro numeros WhatsApp <i class="material-icons">phone_iphone</i> (+507) 6240 9961 - 6328 7921</p>
+      </div>
+      <div class="modal-footer">
+        
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+        <a href="#!" class="modal-action waves-effect waves-green btn-flat ">Enviar</a>
+      </div>
+    </div>
+    
+    </p>
+  </div>
+
+</main>
+
+<% include ../views/partials/footer %>
+
+</body>
+</html>

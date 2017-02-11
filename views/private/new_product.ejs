@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>new product</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+
+<form id="newProductForm"  method="POST" action="/product" enctype="multipart/form-data" >
+	<label for="group">Grupo</label>
+		<input type="text" id="group" name="group">
+	<label for="group">Sub-Grupo</label>
+		<input type="text" id="subgroup" name="subgroup">
+	<label for="name">Nombre</label>
+		<input type="text" id="name" name="name">
+	<label for="price">Precio</label>
+		<input type="text" id="price" name="price">
+	<label for="description">Descripción</label>
+		<input type="text" id="description" name="description">
+	<label for="exist">Disponible</label>
+		<input type="checkbox" id="exist" name="exist">	
+	<label for="outstanding">Destacado</label>
+		<input type="checkbox" id="outstanding" name="outstanding">
+	<label for="photos">Fotos</label>
+		<input type="file" id="photos" name="fieldphotos" multiple />
+
+	<input type="submit" value="Guardar" />
+
+</form>
+
+<div id="destination" style="width: 100px;"></div>
+
+</body>
+
+<script>
+document.getElementById('photos').addEventListener('change', function() {
+var file,
+		destination = document.getElementById('destination')
+		destination.innerHTML = ''
+
+	// Looping in case they uploaded multiple files
+	for(var x = 0, xlen = this.files.length; x < xlen; x++) {
+		file = this.files[x]
+		if(file.type.indexOf('image') != -1) { // Very primitive "validation"
+
+			var reader = new FileReader()
+
+			reader.onload = function(e) {
+				var img = new Image()
+				img.src = e.target.result // File contents here
+
+				destination.appendChild(img)
+			};
+			
+			reader.readAsDataURL(file)
+		}
+	}
+});
+</script>
+</html>
