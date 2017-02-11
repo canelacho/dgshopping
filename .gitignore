@@ -2,3 +2,4 @@ node_modules/*
 testKeyPair.pem
 querys.js
 .DS_Store
+public/img/*
