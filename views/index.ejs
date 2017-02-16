@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="generalView">
 <head>
 	
   <% include ../views/partials/head %>
@@ -7,11 +7,12 @@
 	<title><%= title %></title>
 	<link rel="stylesheet" href="">
 </head>
-<body>
+<body ng-controller="list-products" ng-Cloak>
 
 <% include ../views/partials/header %>
 
 <main class="row">
+
   <div class="row">
     <div class="carousel carousel-slider center" data-indicators="true">
       <!-- <div class="carousel-fixed-item center">
@@ -43,74 +44,26 @@
     </div>
 
     <div class="row gallery-row">
-      
-      <a href="product">
-        <div class="col s12 m4 l3">
-          <div class="padre-watch-product">
-            <img class="responsive-img" src="/img/test1.jpg" alt="">
-            <span class="center-align watch-product">
-              Ver Detalle          
-            </span>
+
+      <div ng-repeat="product in productList">
+        <a href="product_detail/{{ product._id }}">
+          <div class="col s12 m4 l3">
+            <div class="padre-watch-product">
+              <img class="responsive-img" ng-src="img/products/{{ product.photos[0] }}" alt="imagen of product">
+              <span class="center-align watch-product">
+                Ver Detalle          
+              </span>
+            </div>
+            <div class="center-align info-product">
+              <span class="product-group">{{ product.group }}</span><br>
+              <span class="product-name">{{ product.name }}</span><br>
+              <span class="product-price">{{ product.price | currency }}</span>
+            </div>
           </div>
-          <div class="center-align info-product">
-            <span class="product-group">Covers de timón</span><br>
-            <span class="product-name">Unicolor Pink</span><br>
-            <span class="product-price">15.00 $</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="product">
-      <div class="col s12 m4 l3">
-        <div class="padre-watch-product">
-          <img class="responsive-img" src="/img/test4.jpg" alt="">
-          <span class="center-align watch-product">
-            Ver Detalle          
-          </span>
-        </div>
-        <div class="center-align info-product">
-          <span class="product-group">Covers de llave</span><br>
-          <span class="product-name">Sticker Frase</span><br>
-          <span class="product-price">9.00 $</span>
-        </div>
+        </a>
       </div>
-      </a>
-
-      <a href="product">
-      <div class="col s12 m4 l3">
-        <div class="padre-watch-product">
-          <img class="responsive-img" src="/img/test3.jpg" alt="">
-          <span class="center-align watch-product">
-            Ver Detalle          
-          </span>
-        </div>
-        <div class="center-align info-product">
-          <span class="product-group">Covers de timón</span><br>
-          <span class="product-name">Unicolor Pink</span><br>
-          <span class="product-price">15.00 $</span>
-        </div>
-      </div>
-      </a>
-
-      <a href="product">
-      <div class="col s12 m4 l3">
-        <div class="padre-watch-product">
-          <img class="responsive-img" src="/img/test2.jpg" alt="">
-          <span class="center-align watch-product">
-            Ver Detalle          
-          </span>
-        </div>
-        <div class="center-align info-product">
-          <span class="product-group">Covers de timón</span><br>
-          <span class="product-name">Unicolor Blue</span><br>
-          <span class="product-price">14.00 $</span>
-        </div>
-      </div>
-      </a>
 
     </div>
-
-
   </div>
 
   <div class="row parallax-container">
@@ -129,7 +82,9 @@
     <div id="modalContact" class="modal modal-fixed-footer">
       <div class="modal-content">
         <h4>Contactanos!</h4>
-        <p>Completa tu información y envianos tus sugerencias, solicitudes ó comentarios y a la brevedad te estaresmos contactando</p>
+        <p>
+          Completa tu información y envianos tus sugerencias, solicitudes ó comentarios y a la brevedad te estaresmos contactando
+        </p>
 
         <div class="row">
           <form class="col s12">
@@ -168,10 +123,11 @@
       </div>
     </div>
     
-    </p>
   </div>
 
 </main>
+
+<script src="/ctrllerPublicProducts.js"></script>
 
 <% include ../views/partials/footer %>
 

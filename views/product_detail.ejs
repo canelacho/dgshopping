@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="detailView">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
 	<title>Test</title>
 	<link rel="stylesheet" href="">
 </head>
-<body>
+<body ng-controller="productDetail" ng-Cloak>
 
 <% include ../views/partials/header %>
 
@@ -19,91 +19,26 @@
   <div class="row">
     <div class="col s12 m6">
       <div class="col s9">
-        <img class="responsive-img materialboxed" src="/img/test1.jpg" alt="">
+        <img class="responsive-img materialboxed" ng-src="/img/products/{{ productFinded.photos[0] }}" alt="">
       </div>
       <div class="col s3">
-        <img class="responsive-img materialboxed" src="/img/test1.jpg" alt="">
-        <img class="responsive-img materialboxed" src="/img/test1.jpg" alt="" style="margin-top:6px; margin-bottom:6px">
-        <img class="responsive-img materialboxed" src="/img/test1.jpg" alt="">
+        <img class="responsive-img materialboxed" ng-src="/img/products/{{ productFinded.photos[1] }}" alt="">
+        <img class="responsive-img materialboxed" ng-src="/img/products/{{ productFinded.photos[2] }}" alt="" style="margin-top:6px; margin-bottom:6px">
+        <img class="responsive-img materialboxed" ng-src="/img/products/{{ productFinded.photos[3] }}" alt="">
       </div>
     </div>
     <div class="col s12 m6">
-      <span class="row" style="font-size:20px; color:#606060">Covers de timón</span>
-      <span class="row" style="font-size:30px; color:#606060;">Unicolor Pink</span>
-      <span class="row" style="font-size:25px; color:#959595">$15.00</span>
+      <span class="row" style="font-size:20px; color:#606060">{{ productFinded.subgroup }}</span>
+      <span class="row" style="font-size:30px; color:#606060;">{{ productFinded.name }}</span>
+      <span class="row" style="font-size:25px; color:#959595">{{ productFinded.price | currency }}</span>
       <hr>
       <div class="row">
-        Maecenas consequat mauris nec semper tristique. Etiam fermentum augue ac vulputate pulvinar. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque ThemeForest arcu sed mollis. Nulla egestas nulla elit, eu condimentum diam fringilla blandit.
+        {{ productFinded.description }}
       </div>
       
     </div>
   </div>
   <hr>
-
-  <div class="row">
-    <div class="row title-items">
-      <h3 class="col s12">PRODUCTOS DESTACADOS</h3>
-    </div>
-
-    <div class="row gallery-row">
-      
-      <div class="col s12 m4 l3">
-        <div class="padre-watch-product">
-          <img class="responsive-img" src="/img/test1.jpg" alt="">
-          <span class="center-align watch-product">
-            Ver Detalle          
-          </span>
-        </div>
-        <div class="center-align info-product">
-          <span class="product-group">STICKERS</span><br>
-          <span class="product-name">Sticker Frase</span><br>
-          <span class="product-price">7.00 $</span>
-        </div>
-      </div>
-
-      <div class="col s12 m4 l3">
-        <div class="padre-watch-product">
-          <img class="responsive-img" src="/img/test4.jpg" alt="">
-          <span class="center-align watch-product">
-            Ver Detalle          
-          </span>
-        </div>
-        <div class="center-align info-product">
-          <span class="product-group">STICKERS</span><br>
-          <span class="product-name">Sticker Frase</span><br>
-          <span class="product-price">7.00 $</span>
-        </div>
-      </div>
-
-      <div class="col s12 m4 l3">
-        <div class="padre-watch-product">
-          <img class="responsive-img" src="/img/test3.jpg" alt="">
-          <span class="center-align watch-product">
-            Ver Detalle          
-          </span>
-        </div>
-        <div class="center-align info-product">
-          <span class="product-group">STICKERS</span><br>
-          <span class="product-name">Sticker Frase</span><br>
-          <span class="product-price">7.00 $</span>
-        </div>
-      </div>
-
-      <div class="col s12 m4 l3">
-        <div class="padre-watch-product">
-          <img class="responsive-img" src="/img/test2.jpg" alt="">
-          <span class="center-align watch-product">
-            Ver Detalle          
-          </span>
-        </div>
-        <div class="center-align info-product">
-          <span class="product-group">STICKERS</span><br>
-          <span class="product-name">Sticker Frase</span><br>
-          <span class="product-price">7.00 $</span>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
 
@@ -155,7 +90,7 @@
 
 </main>
 
-
+<script src="/ctrllerPublicDetailProduct.js"></script>
 <% include ../views/partials/footer %>
 
 </body>
