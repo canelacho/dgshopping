@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var groupsubgroup = new Schema({
 		groupname: String,
-		subgroupname: Array
+		subgroupitems: Array
 })
 
 module.exports = mongoose.model('groups', groupsubgroup)

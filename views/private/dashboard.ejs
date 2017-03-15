@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html ng-app="privateArea">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+
+	<!-- fontawesome -->
+	<script src="https://use.fontawesome.com/302211b7c0.js"></script>
+  <!-- <link rel="stylesheet" href="/css/font-awesome.min.css"> -->
+	<!-- own Css -->
+	<link rel="stylesheet" href="/css/private.css" type="text/css">
+	
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Raleway:400,700,900" rel="stylesheet">
+
+	<title>Dashboard D&G Shopping</title>
+	
+</head>
+
+<body ng-controller="adminWeb" ng-Cloak>
+
+<div class="info-users">Usuario: - <a href="closeSession"> Cerrar Sesión</a></div>
+<h3>Administrar Web</h3>
+
+<div class="container" s12>
+
+<ul class="collapsible" data-collapsible="accordion">
+  <li>
+    <div class="collapsible-header"><i class="material-icons">group_work</i> Grupos y Subgrupos</div>
+    <div class="collapsible-body">
+			<div class="divinside">
+				<div class="row">
+					<div class="input-field col s12 m6">
+				    <select class="select" ng-model="groupSelected" ng-change="loadChangeSelect()" material-select watch>
+				        <option value="" disabled selected>Grupos</option>
+				        <option ng-repeat="item in groupList | orderBy:'groupname'" value="{{ item.groupname }}" >{{ item.groupname }}</option>
+				    </select>
+				    <label>Listado de Grupos</label>
+					</div>
+					<div class="input-field col s12">
+				    <a class="waves-effect waves-light btn" ng-click="editGroup(groupSelected)" ng-show="btnEditGroup"><i class="material-icons">mode_edit</i> Editar</a>
+				    <a class="waves-effect waves-light btn" ng-click="deleteGroup(groupSelected)" ng-show="btnDeleteGroup"><i class="material-icons">delete_forever</i> Eliminar</a>
+				    <a class="waves-effect  lwaves-light btn" ng-click="cancelGroup()" ng-show="btnCancelGroup"><i class="material-icons">cancel</i> Cancelar</a>
+				  </div>
+				</div>
+
+				<div class="row">
+					<div class="input-field col s12 m6">
+			      <input placeholder="Nombre del Grupo" id="group_name" type="text" class="validate" ng-model="groupName">
+			      <label for="group_name">Grupo</label>
+			    </div>
+					
+					<a class="waves-effect waves-light btn" ng-click="updateGroup(groupId)" ng-show="btnUpdateGroup" ng-value="groupId"><i class="material-icons">system_update_alt</i> Actualizar</a>
+					<a class="waves-effect waves-light btn" ng-click="createGroup(groupName,subGroupArray)" ng-show="btnCreateGroup" onClick="cleanChips()"><i class="material-icons">save</i> Crear</a>
+				</div>
+				<div>Sub-Grupos</div>
+				<div id="chips" class="chips chips-initial"></div>
+			</div>
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header"><i class="material-icons">style</i> Producto</div>
+    <div class="collapsible-body">
+			<div class="divinside">
+				
+				<form id="newProductForm"  method="POST" action="/product" enctype="multipart/form-data" >
+					<div>
+						<select class="select" ng-model="groups" ng-change="loadChangeSelect()" material-select watch>
+				        <option value="" disabled selected>Grupos</option>
+				        <option ng-repeat="item in groupList | orderBy:'groupname'" value="{{ item.groupname }}" >{{ item.groupname }}</option>
+				    </select>
+				    <label>Grupo</label>
+					</div>
+					<div>
+						<select class="select" ng-model="subgroup" ng-change="loadChangeSelect()" material-select watch>
+				        <option value="" disabled selected>Sub-grupos</option>
+				        <option ng-repeat="sitem in item | orderBy:'itemsubgroup'" value="{{ sitem.itemsubgroup }}" >{{ sitem.itemsubgroup }}</option>
+				    </select>
+				    <label>Subgrupo</label>
+
+					</div>
+					<div>
+						<label for="name">Nombre</label>
+						<input type="text" id="name" name="name">
+					</div>
+					<div>
+						<label for="price">Precio</label>
+						<input type="number" id="price" name="price">
+					</div>
+					<div>
+						<label for="description">Descripción</label>
+						<input type="text" id="description" name="description">
+					</div>
+					<div class="s6">
+						<p>
+				      <input type="checkbox" id="avaliable" name="exist" />
+				      <label for="avaliable">Disponible</label>
+				    </p>
+					</div>
+					<div>
+						<p class="s6">
+				      <input type="checkbox" id="outstanding" name="outstanding" />
+				      <label for="outstanding">Destacado</label>
+				    </p>
+					</div>
+					<div>
+						<div class="file-field input-field">
+				      <div class="btn">
+				        <span>Fotos</span>
+				        <input type="file" multiple id="photos" name="fieldphotos">
+				      </div>
+				      <div class="file-path-wrapper">
+				        <input class="file-path validate" type="text" placeholder="Cargar una o mas imagenes" name="fieldphotos">
+				      </div>
+				    </div>
+					</div>
+					<div id="destination"></div>
+					<div>
+						<button  type="submit" class="waves-effect waves-light btn" ng-click="saveProduct()" ng-show="true">
+							<i class="material-icons">save</i> Crear
+						</button>
+					</div>
+				</form>
+
+
+
+			</div>
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header"><i class="material-icons">account_circle</i> Usuarios</div>
+    <div class="collapsible-body">
+    	<div class="divinside">
+
+    	</div>
+    </div>
+  </li>
+</ul>
+</div>
+
+
+<div class="container">
+	<div>Listado Ultimos Productos</div>
+	<div>Filtro y Busqueda</div>
+</div>
+
+
+
+ 
+<script src="/ctrllerPrivateArea.js"></script>
+
+<!-- OLD LOAD 
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/js/materialize.min.js"></script> -->
+
+
+<!-- JavaScript for: jQuery, angular, materialize, and angular-materialize. All of which are needed. -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+
+
+<script>
+var itemsSubGroup = [] 
+
+	$(document).ready(function() {
+    $('select').material_select()
+    // var test = $('select').material_select()
+    // console.log('test select:' + test)
+  })
+
+  $('.chips-initial').material_chip({
+  	placeholder: 'Ingrese Tags',
+    secondaryPlaceholder: '+Tag',
+    data: []
+  })
+
+  var chips = $('.chips').material_chip('data');
+  
+  $('.chips').on('chip.add', function(e, chip){
+  	chips.push(chip)
+  })
+
+  $('.chips').on('chip.delete', function(e, chip){
+  	for(i=0; i<chips.length; i++) {
+  		if(chips[i].tag == chip.tag){
+  			chips.splice(i,1)
+  			break
+  		}
+  	}
+  })
+
+  cleanChips = function(){
+  	$('.chips-initial').material_chip({
+	  	placeholder: 'Ingrese Tags',
+	    secondaryPlaceholder: '+Tag',
+	    data: []
+	  })
+  }
+
+  // var dom_el = document.querySelector('[ng-controller="adminWeb"]');
+  // var ng_el = angular.element(dom_el);
+  // var ng_el_scope = ng_el.scope();
+  // var itemsSubGroup = ng_el_scope.itemsSubGroup;
+
+  loadChips = function(itemsSubGroup){
+  	console.log('habla '+ itemsSubGroup)
+  	var arraySubGroup = []
+  	for(i=0; i<itemsSubGroup.length; i++){
+  		arraySubGroup[i] = { tag: itemsSubGroup[i]}
+  	}
+  	console.log(arraySubGroup)
+
+  	$('.chips-initial').material_chip({
+	  	placeholder: 'Ingrese Tags',
+	    secondaryPlaceholder: '+Tag',
+	    data: arraySubGroup
+	  })
+  }
+
+// upload imgs
+document.getElementById('photos').addEventListener('change', function() {
+var file,
+		destination = document.getElementById('destination')
+		destination.innerHTML = ''
+
+		console.log('mostrando destination')
+		console.log(destination)
+
+	// Looping in case they uploaded multiple files
+	for(var x = 0, xlen = this.files.length; x < xlen; x++) {
+		file = this.files[x]
+		if(file.type.indexOf('image') != -1) { // Very primitive "validation"
+
+			var reader = new FileReader()
+
+			reader.onload = function(e) {
+				var img = new Image()
+				img.src = e.target.result // File contents here
+				img.width = 180
+				img.style = "margin:10px"
+
+
+				destination.appendChild(img)
+			}
+			
+			reader.readAsDataURL(file)
+		}
+	}
+})
+
+
+
+</script>
+
+</body>
+</html>

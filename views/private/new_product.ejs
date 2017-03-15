@@ -50,6 +50,7 @@ var file,
 			reader.onload = function(e) {
 				var img = new Image()
 				img.src = e.target.result // File contents here
+				img.width = 100px
 
 				destination.appendChild(img)
 			};

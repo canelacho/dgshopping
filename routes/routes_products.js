@@ -33,6 +33,9 @@ var product = require('../models/product'),
 	// POST
 	addProduct = function(req, res, next) {
 
+		console.log('revisando el post')
+		console.log(req.body)
+		
 		var photos = []
 		for(var i in req.files) {
 		    photos.push(req.files[i].filename)

@@ -7,12 +7,11 @@
 	<title><%= title %></title>
 	<link rel="stylesheet" href="">
 </head>
-<body ng-controller="list-products" ng-Cloak>
+<body >
 
 <% include ../views/partials/header %>
 
-<main class="row">
-
+<!-- CARROUSE  -->
   <div class="row">
     <div class="carousel carousel-slider center" data-indicators="true">
       <!-- <div class="carousel-fixed-item center">
@@ -36,32 +35,36 @@
       </div>
     </div>
   </div>
+<!-- CARROUSE  -->
+
+
+<main ng-controller="list-products" ng-Cloak>
 
 
   <div class="row">
-    <div class="row title-items">
+    <div class="row">
       <h3 class="col s12">PRODUCTOS DESTACADOS</h3>
     </div>
 
     <div class="row gallery-row">
 
-      <div ng-repeat="product in productList">
-        <a href="product_detail/{{ product._id }}">
-          <div class="col s12 m4 l3">
+        <div ng-repeat="product in productList" class="col s12 m4 l3 outstanding-product">
+          
             <div class="padre-watch-product">
-              <img class="responsive-img" ng-src="img/products/{{ product.photos[0] }}" alt="imagen of product">
-              <span class="center-align watch-product">
-                Ver Detalle          
-              </span>
+              <img class="responsive-img" ng-src="img/products/{{ product.photos[0] }}" alt="imagen de producto">
+              <a href="product_detail/{{ product._id }}">
+                <span class="center-align watch-product">
+                  Ver Detalle          
+                </span>
+              </a>
             </div>
             <div class="center-align info-product">
               <span class="product-group">{{ product.group }}</span><br>
               <span class="product-name">{{ product.name }}</span><br>
               <span class="product-price">{{ product.price | currency }}</span>
             </div>
-          </div>
-        </a>
-      </div>
+          
+        </div>
 
     </div>
   </div>
@@ -75,53 +78,7 @@
     <h5 class="center-align">PARA VENTAS AL MAYOR puedes contactarnos a través de: <a href="#modalContact" style="color:#4da197">contacto@dgshopping.com</a></h5>
     <p class="center-align">HORARIO DE ATENCIÓN DE LUNES A VIERNES de 8 AM a 6 PM - SÁBADO DE 9 AM a 4 PM.</p>
 
-    <!-- Modal Trigger -->
-    <!-- <a class="modal-trigger waves-effect waves-light btn" href="#modalConta"><i class="material-icons right">contact_phone</i>Contacto</a> -->
-
-    <!-- Modal Structure -->
-    <div id="modalContact" class="modal modal-fixed-footer">
-      <div class="modal-content">
-        <h4>Contactanos!</h4>
-        <p>
-          Completa tu información y envianos tus sugerencias, solicitudes ó comentarios y a la brevedad te estaresmos contactando
-        </p>
-
-        <div class="row">
-          <form class="col s12">
-            <div class="row">
-              <div class="input-field col s12 m6">
-                <i class="material-icons prefix">account_circle</i>
-                <input id="icon_prefix" type="text" class="validate">
-                <label for="icon_prefix">Nombre y Apellido</label>
-              </div>
-              <div class="input-field col s12 m6">
-                <i class="material-icons prefix">phone</i>
-                <input id="icon_telephone" type="tel" class="validate">
-                <label for="icon_telephone">Teléfono</label>
-              </div>
-              <div class="input-field col s12 m6">
-                <i class="material-icons prefix">email</i>
-                <input id="icon_email" type="email" class="validate">
-                <label for="icon_email">e-mail</label>
-              </div>
-
-              <div class="input-field col s12">
-                <textarea id="msg" class="materialize-textarea"></textarea>
-                <label for="msg">Mesaje - Comentario - Consulta</label>
-              </div>
-
-            </div>
-          </form>
-        </div>
-
-        <p>Recuerda que tambien nos puedes contactar en nuestras redes sociales <a href="https://www.facebook.com/Dgshopping-664861123630342/?fref=ts"><i class="fa fa-facebook-official"></i> Dgshopping</a> / <a href="https://www.instagram.com/dgshoppingpty/"><i class="fa fa-instagram" ></i> dgshoppingpty </a> ó a través de nuestro numeros WhatsApp <i class="material-icons">phone_iphone</i> (+507) 6240 9961 - 6328 7921</p>
-      </div>
-      <div class="modal-footer">
-        
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
-        <a href="#!" class="modal-action waves-effect waves-green btn-flat ">Enviar</a>
-      </div>
-    </div>
+    <% include ../views/partials/modal_contact %>
     
   </div>
 

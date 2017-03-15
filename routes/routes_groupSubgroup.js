@@ -22,12 +22,11 @@ module.exports = function(app) {
 	// POST 
 	addGroup = function(req, res, next) {
 
-		console.log('adding group')
-		console.log('info on body: ' + JSON.stringify(req.body, null, 2) )
-
+		// console.log('info on body: ' + JSON.stringify(req.body, null, 2) )
+		console.log(req.body)
 		nameGroup = new group({
 				groupname: req.body.group,
-				subgroupname: req.body.subgroup
+				subgroupitems: req.body.subgroup
 		})
 
 		nameGroup.save(function(err) {
@@ -41,10 +40,12 @@ module.exports = function(app) {
 
 	// UPDATE 
 	editGroup = function(req, res) {
+		console.log('entramos al update del grupo')
 		group.findById(req.params.id, function(err, groupFinded) {
-
+			console.log(groupFinded)
+			console.log(req.body.group)
 			groupFinded.groupname = req.body.group,
-			groupFinded.subgroupname = req.body.subgroup
+			groupFinded.subgroupitems = req.body.subgroup
 
 			groupFinded.save(function(err) {
 				if(!err) console.log('Group successfully updated')
