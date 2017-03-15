@@ -3,28 +3,70 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+
+	<!-- fontawesome -->
+	<script src="https://use.fontawesome.com/302211b7c0.js"></script>
+  <!-- <link rel="stylesheet" href="/css/font-awesome.min.css"> -->
+	<!-- own Css -->
+	<link rel="stylesheet" href="/css/private.css" type="text/css">
+	
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Raleway:400,700,900" rel="stylesheet">
+
 	<title><%= title %></title>
 	<link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
 
-<div class="login-form">
+<div class="container">
+	<div class="row">
+		<div class="col s12 m6 offset-m3">
 
-	<img src="/img/dgshoppinglogo.png" alt="">
-	<form action="validate_login" method="POST">
-		<div>
-			<label for="name">Usuario: </label>
-			<input id="name" type="text" name="user">
+			<div class="login-form">
+
+				<img src="/img/dgshoppinglogo.png" alt="">
+
+				<form action="validate_login" method="POST">
+
+				<div class="row">
+					<div class="input-field col s12">
+						<label for="name">Usuario: </label>
+						<input id="name" type="text" name="user" class="validate">
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<label for="password">Clave: </label>
+						<input id="password" type="password" name="password" class="validate">
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="submit" value="Entrar" class="waves-effect waves-light btn">
+					</div>
+				</div>
+
+				</form>
+			</div>
+
 		</div>
-		<div>
-			<label for="password">Clave: </label>
-			<input id="password" type="password" name="password">
-		</div>
-		<div>
-			<input type="submit" value="Entrar">
-		</div>
-	</form>
+	</div>
 </div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/js/angular.min.js"></script>
+<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
 
 </body>
 </html>
