@@ -140,6 +140,45 @@
     <div class="collapsible-body">
     	<div class="divinside">
 
+    		<div class="row">
+			    <form class="col s12">
+			      <div class="row">
+			        <div class="input-field col s12 m4">
+			          <input id="user_name" type="text" class="validate" ng-model="user_name">
+			          <label for="user_name">Nombre Usuario</label>
+			        </div>
+		
+			        <div class="input-field col s12 m4">
+			          <input id="password" type="password" class="validate" ng-model="password">
+			          <label for="password">Password</label>
+			        </div>
+
+			        <div class="col s12 m4">
+			        	<a class=" waves-light purple btn" ng-click="saveUser(user_name, password)" ng-show="btnUserSave"><i class="material-icons">save</i></a>
+			        	<a class=" waves-light red btn" ng-show="btnUserCancel"><i class="material-icons">cancel</i></a>
+			        </div>
+			      </div>
+			    </form>
+			  </div>
+
+				<ul class="collection with-header">
+	        <li class="collection-header"><h4>Listado de Usuarios:</h4></li>
+	        
+	        <li class="collection-item" ng-repeat="user in groupUsersList">
+	        	<div>
+	        	{{ user.name }}
+		        	<a href="{{ user._id }}" class="secondary-content">
+			        	<i class="material-icons">mode_edit</i>
+		        	</a>
+		        	<a href="{{ user._id }}" class="secondary-content">
+								<i class="material-icons">delete_forever</i>
+		        	</a>
+	        	</div>
+	        </li>
+
+	      </ul>
+            
+
     	</div>
     </div>
   </li>

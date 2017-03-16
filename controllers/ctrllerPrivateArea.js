@@ -11,6 +11,9 @@ var groupList = {}
 		$scope.btnCancelGroup = false
 		$scope.btnUpdateGroup = false
 		$scope.btnCreateGroup = true
+		refreshUsersList()
+		$scope.btnUserSave = true
+		$scope.btnUserCancel = false
 	}
 
   $scope.loadChangeSelect = function(){
@@ -139,6 +142,36 @@ var groupList = {}
 		$scope.btnCreateGroup = true
 		$scope.groupName = ""
 		cleanChips()
+	}
+
+
+
+	refreshUsersList = function() {
+		console.log('refrescando')
+		
+		$http({ method:'GET', url:'/user' }).success(function(data,status,headers,config){
+			if(data){
+				console.log(data)
+				groupUsersList = data
+				console.log('group users list actualizado a ' + groupUsersList)
+				$scope.groupUsersList = data
+			} else {
+				console.log('ERROR data')
+			}
+		})
+	}
+
+	$scope.saveUser = function(user_name, password){
+		console.log(user_name + " - " + password)
+		$http({ method:'POST', url:'/user',data:{name:user_name, password:password} }).success(function(data,status,headers,config){
+			if(data){
+				$scope.user_name = ""
+				$scope.password = ""
+				refreshUsersList()
+			} else {
+				console.log('ERROR data')
+			}
+		})
 	}
 
 	// Load page init
