@@ -38,6 +38,7 @@ module.exports = function(app){
 
 	// PUT
 	editUser = function(req, res) {
+
 		user.findById(req.params.id, function(err, userFind) {
 			userFind.name = req.body.name,
 			userFind.password = req.body.password

@@ -13,6 +13,7 @@ var groupList = {}
 		$scope.btnCreateGroup = true
 		refreshUsersList()
 		$scope.btnUserSave = true
+		$scope.btnEditUserSave = false
 		$scope.btnUserCancel = false
 	}
 
@@ -147,7 +148,6 @@ var groupList = {}
 
 
 	refreshUsersList = function() {
-		console.log('refrescando')
 		
 		$http({ method:'GET', url:'/user' }).success(function(data,status,headers,config){
 			if(data){
@@ -162,16 +162,74 @@ var groupList = {}
 	}
 
 	$scope.saveUser = function(user_name, password){
-		console.log(user_name + " - " + password)
-		$http({ method:'POST', url:'/user',data:{name:user_name, password:password} }).success(function(data,status,headers,config){
+
+		if(user_name !== undefined && user_name.length != 0 && password !== undefined && password != 0){
+
+			$http({ method:'POST', url:'/user',data:{name:user_name, password:password} }).success(function(data,status,headers,config){
+				if(data){
+					$scope.user_name = ""
+					$scope.password = ""
+					refreshUsersList()
+				} else {
+					console.log('ERROR data')
+				}
+			})
+		} else {
+			console.log("data in blank")
+		}
+	}
+
+	$scope.editUser = function(id,name,password){
+		$scope.user_name = name
+		$scope.password = password
+		$scope.usr_id = id
+		$scope.btnUserSave = false
+		$scope.btnEditUserSave = true
+		$scope.btnUserCancel = true
+	}
+
+	cancelEditUser = function(){
+		$scope.user_name = ""
+		$scope.password = ""
+		$scope.usr_id = ""
+		$scope.btnUserSave = true
+		$scope.btnEditUserSave = false
+		$scope.btnUserCancel = false
+	}
+
+	$scope.cancelEditUser = function() {
+		cancelEditUser()
+	}
+
+	$scope.saveEditUser = function(usrId,user_name,password){
+		if(user_name !== undefined && user_name.length != 0 && password !== undefined && password != 0){
+
+			$http({ method:'PUT', url:'/user/'+usrId,data:{name:user_name, password:password} }).success(function(data,status,headers,config){
+				if(data){
+					$scope.user_name = ""
+					$scope.password = ""
+					$scope.usr_id = ""
+					cancelEditUser()
+					refreshUsersList()
+				} else {
+					console.log('ERROR data')
+				}
+			})
+		} else {
+			console.log("data in blank")
+		}
+	}
+
+	$scope.deleteUser = function(usrId){
+		console.log(usrId)
+		$http({ method:'DELETE', url:'/user/'+usrId}).success(function(data,status,headers,config){
 			if(data){
-				$scope.user_name = ""
-				$scope.password = ""
 				refreshUsersList()
 			} else {
 				console.log('ERROR data')
 			}
 		})
+
 	}
 
 	// Load page init
