@@ -73,16 +73,16 @@
 				
 				<form id="newProductForm"  method="POST" action="/product" enctype="multipart/form-data" >
 					<div>
-						<select class="select" ng-model="groups" ng-change="loadChangeSelect()" material-select watch>
+						<select name="group" class="select" ng-model="groupsNewProuct" ng-change="loadChangeSelectProduct()" material-select watch>
 				        <option value="" disabled selected>Grupos</option>
 				        <option ng-repeat="item in groupList | orderBy:'groupname'" value="{{ item.groupname }}" >{{ item.groupname }}</option>
 				    </select>
 				    <label>Grupo</label>
 					</div>
 					<div>
-						<select class="select" ng-model="subgroup" ng-change="loadChangeSelect()" material-select watch>
+						<select name="subgroup" class="select" ng-model="subGroupNewProduct" material-select watch>
 				        <option value="" disabled selected>Sub-grupos</option>
-				        <option ng-repeat="sitem in item | orderBy:'itemsubgroup'" value="{{ sitem.itemsubgroup }}" >{{ sitem.itemsubgroup }}</option>
+				        <option ng-repeat="item in subgroupNewProduct | orderBy:'item' track by $index" value="{{ item }}" >{{ item }}</option>
 				    </select>
 				    <label>Subgrupo</label>
 
@@ -129,7 +129,6 @@
 						</button>
 					</div>
 				</form>
-
 
 
 			</div>
@@ -194,10 +193,6 @@
 </div>
 
 
-
- 
-
-
 <!-- OLD LOAD 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/js/materialize.min.js"></script> -->
@@ -217,7 +212,8 @@
 
 
 <script>
-var itemsSubGroup = [] 
+	
+	var itemsSubGroup = [] 
 
 	$(document).ready(function() {
     $('select').material_select()
@@ -231,8 +227,13 @@ var itemsSubGroup = []
     data: []
   })
 
+
+  resetChip = function(){
+    chips = $('.chips').material_chip('data');
+  }
+
   var chips = $('.chips').material_chip('data');
-  
+
   $('.chips').on('chip.add', function(e, chip){
   	chips.push(chip)
   })
@@ -245,6 +246,10 @@ var itemsSubGroup = []
   		}
   	}
   })
+
+  checkChips = function(){
+  	return $('.chips').material_chip('data');
+  }
 
   cleanChips = function(){
   	$('.chips-initial').material_chip({
@@ -265,6 +270,7 @@ var itemsSubGroup = []
   	for(i=0; i<itemsSubGroup.length; i++){
   		arraySubGroup[i] = { tag: itemsSubGroup[i]}
   	}
+
   	console.log(arraySubGroup)
 
   	$('.chips-initial').material_chip({

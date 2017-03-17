@@ -30,11 +30,6 @@ module.exports = function(app) {
 		res.render('private/dashboard')
 	}
 
-	//newProduct
-	newProduct = function(req, res) {
-		res.render('private/new_product')
-	}
-
 
 
 	// API ROUTES
@@ -47,7 +42,5 @@ module.exports = function(app) {
 	// Close session app
 	app.get(privatePath+'closeSession', closeSession)
 
-	// Create new product
-	app.get(privatePath+'new_product', newProduct)
 
 }

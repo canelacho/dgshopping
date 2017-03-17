@@ -33,7 +33,6 @@ var product = require('../models/product'),
 	// POST
 	addProduct = function(req, res, next) {
 
-		console.log('revisando el post')
 		console.log(req.body)
 		
 		var photos = []
@@ -57,7 +56,8 @@ var product = require('../models/product'),
 			else console.log('ERROR saving new product: ' + err)
 		})
 
-		res.send(newProduct)
+		// res.send(newProduct)
+		res.render('private/dashboard')
 	}
 
 

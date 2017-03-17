@@ -29,6 +29,7 @@ var groupList = {}
 
 		var subGroupArray = []
 		getChip = $window.chips
+
 		for(i=0; i < getChip.length; i++){
 			subGroupArray[i]=getChip[i].tag
 		}
@@ -41,16 +42,23 @@ var groupList = {}
 				console.log('ERROR data')
 			}
 		})
+		//Clean chips array materialize
+		resetChip()
 	} 
 
+	$scope.loadChangeSelectProduct = function(){
+		// console.log("valor seleccionado " + $scope.groupsNewProuct)
+		items = findIndexSubGroups($scope.groupsNewProuct)
+		// console.log(JSON.stringify(items, null, 2))
+		$scope.subgroupNewProduct = items.subitems
+	}
+
 	refreshGroupList = function() {
-		console.log('refrescando')
-		console.log('actual grupo = ' + groupList)
 		$http({ method:'GET', url:'/group' }).success(function(data,status,headers,config){
 			if(data){
-				console.log(data)
+				// console.log(data)
 				groupList = data
-				console.log('group list actualizado a ' + groupList)
+				// console.log('group list actualizado a ' + groupList)
 				$scope.groupList = data
 			} else {
 				console.log('ERROR data')
@@ -64,7 +72,7 @@ var groupList = {}
 			if(groupList[i].groupname == groupSelected) {
 				var indexFinded = groupList[i]._id,
 						subGroupFinded = groupList[i].subgroupitems
-				console.log(indexFinded + ' and ' + subGroupFinded)
+				// console.log(indexFinded + ' and ' + subGroupFinded)
 				return { index:indexFinded , subitems: subGroupFinded }
 			}
 		}
@@ -81,8 +89,8 @@ var groupList = {}
 		$scope.btnCreateGroup = false
 		$scope.groupName = groupSelected
 		$scope.groupId = item.index
-		console.log('probando id '+ item.index)
-		console.log('probando subgrupos '+item.subitems)
+		// console.log('probando id '+ item.index)
+		// console.log('probando subgrupos '+item.subitems)
 		$scope.itemsSubGroup = item.subitems
 		// Send data to jquery
 		loadChips(item.subitems)
@@ -96,6 +104,33 @@ var groupList = {}
 		$scope.btnCreateGroup = true 
 		$scope.groupName = ""
 		$scope.groupSelected = ""
+		cleanChips()
+	}
+
+	$scope.updateGroup = function(id) {
+		
+		var newChips = checkChips(),
+			  subGroupArray = []
+
+		for(i=0; i < newChips.length; i++){
+			subGroupArray[i]=newChips[i].tag
+		}
+
+		$http({ method:'PUT', url:'/group/'+id, data:{ group:$scope.groupName, subgroup:subGroupArray} }).success(function(data,status,headers,config){
+			if(data){
+				console.log('guardado el dato ' + data)
+			} else {
+				console.log('ERROR data')
+			}
+		})
+
+		refreshGroupList()
+		$scope.btnEditGroup = false
+		$scope.btnDeleteGroup = false
+		$scope.btnCancelGroup = false
+		$scope.btnUpdateGroup = false
+		$scope.btnCreateGroup = true
+		$scope.groupName = ""
 		cleanChips()
 	}
 
@@ -119,41 +154,16 @@ var groupList = {}
 		refreshGroupList()
 	}
 
-	$scope.updateGroup = function(id) {
-		
-		var subGroupArray = []
-		getChip = $window.chips
-		for(i=0; i < getChip.length; i++){
-			subGroupArray[i]=getChip[i].tag
-		}
 
-		$http({ method:'PUT', url:'/group/'+id, data:{ group:$scope.groupName, subgroup:subGroupArray} }).success(function(data,status,headers,config){
-			if(data){
-				console.log('guardado el dato ' + data)
-			} else {
-				console.log('ERROR data')
-			}
-		})
-
-		refreshGroupList()
-		$scope.btnEditGroup = false
-		$scope.btnDeleteGroup = false
-		$scope.btnCancelGroup = false
-		$scope.btnUpdateGroup = false
-		$scope.btnCreateGroup = true
-		$scope.groupName = ""
-		cleanChips()
-	}
-
-
+// USERS API
 
 	refreshUsersList = function() {
 		
 		$http({ method:'GET', url:'/user' }).success(function(data,status,headers,config){
 			if(data){
-				console.log(data)
+				// console.log(data)
 				groupUsersList = data
-				console.log('group users list actualizado a ' + groupUsersList)
+				// console.log('group users list actualizado a ' + groupUsersList)
 				$scope.groupUsersList = data
 			} else {
 				console.log('ERROR data')
