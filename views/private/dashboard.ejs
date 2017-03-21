@@ -67,7 +67,7 @@
     </div>
   </li>
   <li>
-    <div class="collapsible-header"><i class="material-icons">style</i> Producto</div>
+    <div id="expand" class="collapsible-header"><i class="material-icons">style</i> Producto</div>
     <div class="collapsible-body">
 			<div class="divinside">
 				
@@ -218,12 +218,12 @@
 		          <div class="padre-watch-product center-align">
 		            <img class="responsive-img" ng-src="../img/products/{{ product.photos[0] }}" alt="imagen de producto">
 		            <button class="waves-effect orange btn" ng-click="editProduct(product._id)">
-		              <span class="center-align watch-product">
+		              <span class="center-align">
 		                <i class="material-icons">mode_edit</i>          
 		              </span>
 		            </button>
 		            <button class="waves-effect waves-light red btn" ng-click="deleteProduct(product._id)">
-		              <span class="center-align watch-product">
+		              <span class="center-align">
 		                <i class="material-icons">delete_forever</i>          
 		              </span>
 		            </button>
@@ -232,7 +232,7 @@
 		            <span class="product-group">Grupo: {{ product.group }}</span><br>
 		            <span class="product-name">id: {{ product._id }}</span><br>
 		            <span class="product-name">Nombre: {{ product.name }}</span><br>
-		            <span class="product-name">Detalle: {{ product.description | limitTo: 20 }}</span><br>
+		            <span class="product-name">Detalle: {{ product.description | limitTo: 15 }}</span><br>
 		            <span class="product-price">Precio: {{ product.price | currency }}</span>
 		          </div>
 		        
@@ -280,6 +280,10 @@
     secondaryPlaceholder: '+Tag',
     data: []
   })
+
+  expand = function(){
+  	document.getElementById("expand").click() 
+  }
 
 
   resetChip = function(){

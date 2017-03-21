@@ -257,14 +257,15 @@ $scope.showProductLimitTo = 4
 	}
 
 	$scope.editProduct = function(productId){
-		console.log("edit "+productId)
+		// console.log("edit "+productId)
+		expand()
 		$http({ method:'GET', url:'/product/' + productId }).success(function(data,status,headers,config){
 			if(data){
 				$scope.btnProductSave = false
 				$scope.btnProductUpdate = true
 				$scope.btnProductCancel= true
 
-				console.log(data)
+				// console.log(data)
 				var productFinded = data
 
 				$scope.groupsNewProuct = data.group
