@@ -4,7 +4,10 @@ app.controller('adminWeb', ['$scope','$http','$window', function($scope,$http,$w
 // JSON.stringify(groupSelected, null, 2)
 var groupList = {}
 
+$scope.showProductLimitTo = 4
+
 	loadPage = function() {
+		$scope.btnProductSave = true
 		refreshGroupList()
 		$scope.btnEditGroup = false
 		$scope.btnDeleteGroup = false
@@ -15,6 +18,7 @@ var groupList = {}
 		$scope.btnUserSave = true
 		$scope.btnEditUserSave = false
 		$scope.btnUserCancel = false
+		loadProductList()
 	}
 
   $scope.loadChangeSelect = function(){
@@ -24,6 +28,16 @@ var groupList = {}
 		$scope.btnUpdateGroup = false
 		$scope.btnCreateGroup = false
   }
+
+  var loadProductList = function(){
+		$http({method:'GET',url:'/product'}).success(function(data,status,headers,config) {
+			if(data){
+				$scope.productList = data 
+			} else {
+				console.log('ERROR data')
+			}
+		})
+	}
 
 	$scope.createGroup = function(groupName){ 
 
@@ -240,6 +254,54 @@ var groupList = {}
 			}
 		})
 
+	}
+
+	$scope.editProduct = function(productId){
+		console.log("edit "+productId)
+		$http({ method:'GET', url:'/product/' + productId }).success(function(data,status,headers,config){
+			if(data){
+				$scope.btnProductSave = false
+				$scope.btnProductUpdate = true
+				$scope.btnProductCancel= true
+
+				console.log(data)
+				var productFinded = data
+
+				$scope.groupsNewProuct = data.group
+				$scope.subGroupNewProduct = data.subgroup
+				$scope.productName = data.name
+				$scope.productPrice = data.price
+				$scope.productDescription = data.description
+				$scope.productExist = data.exist
+				$scope.productOutstanding = data.outstanding
+			} else {
+				console.log('ERROR data')
+			}
+		})
+	}	
+
+	$scope.productUpdateCancel = function(){
+		$scope.btnProductSave = true
+		$scope.btnProductUpdate = false
+		$scope.btnProductCancel= false
+		$scope.groupsNewProuct = ""
+		$scope.subGroupNewProduct = ""
+		$scope.productName = ""
+		$scope.productPrice = ""
+		$scope.productDescription = ""
+		$scope.productExist = ""
+		$scope.productOutstanding = ""
+	}
+
+	$scope.deleteProduct = function(productId){
+		console.log(productId)
+		$http({ method:'DELETE', url:'/product/'+productId}).success(function(data,status,headers,config){
+			if(data){
+				loadProductList()
+			} else {
+				console.log('ERROR data')
+			}
+		})
 	}
 
 	// Load page init

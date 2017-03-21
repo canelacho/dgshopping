@@ -1,10 +1,33 @@
 var app = angular.module('generalView', [])
 app.controller('list-products', ['$scope','$http','$window', function($scope,$http,$window) {
-	
+
+// Use to save how many products are on db
+var cntProducts
+
+$scope.setGroupPublic = function(value){
+	$scope.searchByName = value
+	$scope.valueLimitTo = cntProducts
+}
+
+$scope.showMoreProducts = function(){
+	$scope.valueLimitTo = $scope.valueLimitTo + 4
+}
+
+$scope.showLessProducts = function(){
+	$scope.valueLimitTo = $scope.valueLimitTo - 4
+}
+
+$scope.showAllProducts = function(){
+	$scope.valueLimitTo = cntProducts
+}
+
 	var loadProductList = function(){
 		$http({method:'GET',url:'/product'}).success(function(data,status,headers,config) {
 			if(data){
-				$scope.productList = data 
+				$scope.productList = data
+				// set cnt of products on db
+				cntProducts = data.length
+				$scope.valueLimitTo = 8
 			} else {
 				console.log('ERROR data')
 			}

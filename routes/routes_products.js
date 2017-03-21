@@ -46,6 +46,7 @@ var product = require('../models/product'),
 			name: req.body.name,
 			price: req.body.price,
 			description: req.body.description,
+			date: Date.now(),
 			exist: req.body.exist,
 			outstanding: req.body.outstanding,
 			photos: photos

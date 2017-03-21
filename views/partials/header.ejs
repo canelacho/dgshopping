@@ -53,7 +53,7 @@
             <!-- Dropdown Structure -->
             <ul id='dropdown1' class='dropdown-content'>
               <li ng-repeat="item in groupList track by $index">
-                <a href="#!">{{ item }}</a>
+                <a href="#!" ng-click="setGroupPublic(item)">{{ item }}</a>
               </li>
             </ul>
           </li>

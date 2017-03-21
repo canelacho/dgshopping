@@ -7,6 +7,7 @@ var product = new Schema({
 	name: String,
 	price: Number,
 	description: String,
+	date: Date,
 	exist: { type: Boolean, "default" : false},
 	outstanding: { type: Boolean, "default" : false},
 	photos: { type : Array , "default" : [] }

@@ -45,26 +45,63 @@
       <h3 class="col s12">PRODUCTOS DESTACADOS</h3>
     </div>
 
+    <div class="row">
+      <div class="input-field col s12 m6">
+        <i class="material-icons prefix">search</i>
+        <input placeholder="" id="icon_prefix" type="text" class="validate" ng-model="searchByName">
+        <label for="icon_prefix">Filtrar busqueda por Nombre, Palabra, Precio...</label>
+      </div>
+
+    </div>
+
     <div class="row gallery-row">
 
-        <div ng-repeat="product in productList" class="col s12 m4 l3 outstanding-product">
-          
-            <div class="padre-watch-product">
-              <img class="responsive-img" ng-src="img/products/{{ product.photos[0] }}" alt="imagen de producto">
-              <a href="product_detail/{{ product._id }}">
-                <span class="center-align watch-product">
-                  Ver Detalle          
-                </span>
-              </a>
-            </div>
-            <div class="center-align info-product">
-              <span class="product-group">{{ product.group }}</span><br>
-              <span class="product-name">{{ product.name }}</span><br>
-              <span class="product-price">{{ product.price | currency }}</span>
-            </div>
-          
-        </div>
 
+      <div ng-repeat="product in productList | filter: searchByName | limitTo: valueLimitTo | orderBy: '-date' track by $index" class="col s12 m4 l3 outstanding-product">
+        
+        <div class="padre-watch-product">
+          <img class="responsive-img" ng-src="img/products/{{ product.photos[0] }}" alt="imagen de producto">
+          <a href="product_detail/{{ product._id }}">
+            <span class="center-align watch-product">
+              Ver Detalle          
+            </span>
+          </a>
+        </div>
+        <div class="center-align info-product">
+          <span class="product-group">{{ product.group }}</span><br>
+          <span class="product-name">{{ product.name }}</span><br>
+          <span class="product-price">{{ product.price | currency }}</span>
+          <br><span class="product-price">{{ product.date }}</span>
+        </div>
+        
+      </div>
+
+      <div class="row center-align">
+
+
+        <button class="waves-effect waves-light btn" ng-click="showMoreProducts()" style="margin-top:40px">
+          <span class="">
+            <i class="material-icons">add_box</i>      
+          </span>
+
+        </button> 
+
+        <button class="waves-effect waves-light btn" ng-click="showLessProducts()" style="margin-top:40px">
+          <span class="">
+            <i class="material-icons">indeterminate_check_box</i>     
+          </span>
+
+        </button> 
+
+        <button class="waves-effect waves-light btn" ng-click="showAllProducts()" style="margin-top:40px">
+          <span class="">
+             <i class="material-icons">all_inclusive</i>      
+          </span>
+
+        </button> 
+      </div>
+
+      
     </div>
   </div>
 
@@ -83,9 +120,12 @@
 
 </main>
 
-<script src="/ctrllerPublicProducts.js"></script>
 
 <% include ../views/partials/footer %>
+
+
+<script src="/ctrllerPublicProducts.js"></script>
+
 
 </body>
 </html>
