@@ -73,6 +73,9 @@
 				
 				<form id="newProductForm"  method="POST" action="/product" enctype="multipart/form-data" >
 					<div>
+						<input ng-model="productIdEdit" ng-show="false">
+					</div>
+					<div>
 						<select name="group" class="select" ng-model="groupsNewProuct" ng-change="loadChangeSelectProduct()" material-select watch>
 				        <option value="" disabled selected>Grupos</option>
 				        <option ng-repeat="item in groupList | orderBy:'groupname'" value="{{ item.groupname }}" >{{ item.groupname }}</option>
@@ -118,7 +121,7 @@
 				        <input type="file" multiple id="photos" name="fieldphotos">
 				      </div>
 				      <div class="file-path-wrapper">
-				        <input class="file-path validate" type="text" placeholder="Cargar una o mas imagenes" name="fieldphotos">
+				        <input class="file-path validate" type="text" placeholder="Cargar una o mas imagenes" name="fieldphotos" ng-model="productPhotos">
 				      </div>
 				    </div>
 					</div>
@@ -128,7 +131,7 @@
 							<i class="material-icons">save</i> Crear
 						</button>
 						
-						<a class=" waves-light green btn" ng-click="productUpdateSave(usr_id,user_name,password)" ng-show="btnProductUpdate"><i class="material-icons">sync</i></a>
+						<a class=" waves-light green btn" ng-click="productUpdateSave(productIdEdit,groupsNewProuct,subGroupNewProduct,productName,productPrice,productDescription,productExist,productOutstanding, productPhotos)" ng-show="btnProductUpdate"><i class="material-icons">sync</i></a>
 			      <a class=" waves-light red btn" ng-show="btnProductCancel" ng-click="productUpdateCancel()"><i class="material-icons">cancel</i></a>
 					</div>
 				</form>
@@ -213,7 +216,7 @@
 		<div class="row">
 			<div class="row gallery-row">
 
-		      <div ng-repeat="product in productList | limitTo: showProductLimitTo | filter: searchByName track by $index" class="col s12 m4 l3 outstanding-product">
+		      <div ng-repeat="product in productList | limitTo: showProductLimitTo | filter: searchByName | orderBy: '-date' track by $index" class="col s12 m4 l3 outstanding-product">
 		        
 		          <div class="padre-watch-product center-align">
 		            <img class="responsive-img" ng-src="../img/products/{{ product.photos[0] }}" alt="imagen de producto">

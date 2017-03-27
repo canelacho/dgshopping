@@ -265,9 +265,10 @@ $scope.showProductLimitTo = 4
 				$scope.btnProductUpdate = true
 				$scope.btnProductCancel= true
 
-				// console.log(data)
+		    // console.log(data)
 				var productFinded = data
 
+				$scope.productIdEdit = data._id
 				$scope.groupsNewProuct = data.group
 				$scope.subGroupNewProduct = data.subgroup
 				$scope.productName = data.name
@@ -275,11 +276,44 @@ $scope.showProductLimitTo = 4
 				$scope.productDescription = data.description
 				$scope.productExist = data.exist
 				$scope.productOutstanding = data.outstanding
+				$scope.productPhotos = data.photos
 			} else {
 				console.log('ERROR data')
 			}
 		})
 	}	
+
+	$scope.productUpdateSave = function(id,group,subgroup,name,price,description,exist,outstanding,photos) {
+		console.log(id+' - '+group+' - '+subgroup+' - '+name+' - '+price+' - '+description+' - '+exist+' - '+outstanding+' - '+photos)
+		$http({ method:'PUT', url:'/product/'+id, 
+			data:{group:group,
+						subgroup:subgroup,
+						name:name,
+						price:price,
+						description: description,
+						exist: exist,
+						outstanding: outstanding,
+						photos: photos} }).success(function(data,status,headers,config){
+			if(data){
+				$scope.productIdEdit = ""
+				$scope.groupsNewProuct = ""
+				$scope.subGroupNewProduct = ""
+				$scope.productName = ""
+				$scope.productPrice = ""
+				$scope.productDescription = ""
+				$scope.productExist = ""
+				$scope.productOutstanding = ""
+				$scope.productPhotos = ""
+				$scope.btnProductSave = true
+				$scope.btnProductUpdate = false
+				$scope.btnProductCancel= false
+				expand()
+				loadProductList()
+			} else {
+				console.log('ERROR data')
+			}
+		})
+	}
 
 	$scope.productUpdateCancel = function(){
 		$scope.btnProductSave = true

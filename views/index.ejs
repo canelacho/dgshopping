@@ -57,7 +57,7 @@
     <div class="row gallery-row">
 
 
-      <div ng-repeat="product in productList | filter: searchByName | limitTo: valueLimitTo | orderBy: '-date' track by $index" class="col s12 m4 l3 outstanding-product">
+      <div ng-repeat="product in productList | filter: searchByName | limitTo: valueLimitTo | orderBy: '-date' track by $index" class="col s12 m4 l3 outstanding-product" ng-show="product.exist">
         
         <div class="padre-watch-product">
           <img class="responsive-img" ng-src="img/products/{{ product.photos[0] }}" alt="imagen de producto">
@@ -75,34 +75,35 @@
         </div>
         
       </div>
+    </div>
 
-      <div class="row center-align">
+    <div class="row center-align">
 
 
-        <button class="waves-effect waves-light btn" ng-click="showMoreProducts()" style="margin-top:40px">
-          <span class="">
-            <i class="material-icons">add_box</i>      
-          </span>
+      <button class="waves-effect waves-light btn" ng-click="showMoreProducts()" style="margin-top:40px" title="Mostrar mas productos">
+        <span class="">
+          <i class="material-icons">add_box</i>      
+        </span>
 
-        </button> 
+      </button> 
 
-        <button class="waves-effect waves-light btn" ng-click="showLessProducts()" style="margin-top:40px">
-          <span class="">
-            <i class="material-icons">indeterminate_check_box</i>     
-          </span>
+      <button class="waves-effect waves-light btn" ng-click="showLessProducts()" style="margin-top:40px"  title="Mostrar menos productos">
+        <span class="">
+          <i class="material-icons">indeterminate_check_box</i>     
+        </span>
 
-        </button> 
+      </button> 
 
-        <button class="waves-effect waves-light btn" ng-click="showAllProducts()" style="margin-top:40px">
-          <span class="">
-             <i class="material-icons">all_inclusive</i>      
-          </span>
+      <button class="waves-effect waves-light btn" ng-click="showAllProducts()" style="margin-top:40px" title="Mostrar todos los productos">
+        <span class="">
+           <i class="material-icons">all_inclusive</i>      
+        </span>
 
-        </button> 
-      </div>
+      </button> 
+    </div>
 
       
-    </div>
+
   </div>
 
   <div class="row parallax-container">
