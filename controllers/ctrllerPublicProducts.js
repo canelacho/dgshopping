@@ -34,6 +34,12 @@ $scope.showAllProducts = function(){
 		})
 	}
 
+	loadProductList()
+
+}])
+
+app.controller('navController', ['$scope','$http','$window', function($scope,$http,$window) {
+	
 	var loadGroupList = function(){
 		$http({method:'GET',url:'/group'}).success(function(data,status,headers,config) {
 			if(data){
@@ -58,7 +64,5 @@ $scope.showAllProducts = function(){
 	}
 
 	loadGroupList()
-	loadProductList()
-
 
 }])

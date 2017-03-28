@@ -6,9 +6,10 @@
 
 	<title><%= title %></title>
 </head>
-<body ng-controller="list-products" ng-Cloak>
+<body ng-controller="navController">
 
 <% include ../views/partials/header %>
+
 
 <!-- CARROUSE  -->
   <div class="row">
@@ -36,8 +37,7 @@
   </div>
 <!-- CARROUSE  -->
 
-
-<main>
+<main ng-controller="list-products" ng-Cloak>
 
 
   <div class="row">
