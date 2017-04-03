@@ -19,6 +19,10 @@ $scope.showProductLimitTo = 4
 		$scope.btnEditUserSave = false
 		$scope.btnUserCancel = false
 		loadProductList()
+		refreshCarrouselList()
+		$scope.btnItemSave = true
+		$scope.btnEditItemSave = false
+		$scope.btnItemCancel = false
 	}
 
   $scope.loadChangeSelect = function(){
@@ -32,33 +36,38 @@ $scope.showProductLimitTo = 4
   var loadProductList = function(){
 		$http({method:'GET',url:'/product'}).success(function(data,status,headers,config) {
 			if(data){
-				$scope.productList = data 
+				$scope.productList = data
 			} else {
 				console.log('ERROR data')
 			}
 		})
 	}
 
-	$scope.createGroup = function(groupName){ 
+	$scope.createGroup = function(groupName){
 
-		var subGroupArray = []
-		getChip = $window.chips
+		if(groupName !== undefined && groupName != ""){
 
-		for(i=0; i < getChip.length; i++){
-			subGroupArray[i]=getChip[i].tag
-		}
+			var subGroupArray = []
+			getChip = $window.chips
 
-		$http({ method:'POST', url:'/group',data:{group:$scope.groupName, subgroup:subGroupArray} }).success(function(data,status,headers,config){
-			if(data){
-				$scope.groupName = ""
-				refreshGroupList()
-			} else {
-				console.log('ERROR data')
+			for(i=0; i < getChip.length; i++){
+				subGroupArray[i]=getChip[i].tag
 			}
-		})
-		//Clean chips array materialize
-		resetChip()
-	} 
+
+			$http({ method:'POST', url:'/group',data:{group:$scope.groupName, subgroup:subGroupArray} }).success(function(data,status,headers,config){
+				if(data){
+					$scope.groupName = ""
+					refreshGroupList()
+				} else {
+					console.log('ERROR data')
+				}
+			})
+			//Clean chips array materialize
+			resetChip()
+		} else {
+			alert("Grupo no puede estar en blanco")
+		}
+	}
 
 	$scope.loadChangeSelectProduct = function(){
 		// console.log("valor seleccionado " + $scope.groupsNewProuct)
@@ -115,14 +124,14 @@ $scope.showProductLimitTo = 4
 		$scope.btnDeleteGroup = false
 		$scope.btnCancelGroup = false
 		$scope.btnUpdateGroup = false
-		$scope.btnCreateGroup = true 
+		$scope.btnCreateGroup = true
 		$scope.groupName = ""
 		$scope.groupSelected = ""
 		cleanChips()
 	}
 
 	$scope.updateGroup = function(id) {
-		
+
 		var newChips = checkChips(),
 			  subGroupArray = []
 
@@ -149,7 +158,7 @@ $scope.showProductLimitTo = 4
 	}
 
 	$scope.deleteGroup = function(groupSelected){
-			
+
 		item = findIndexSubGroups(groupSelected)
 
 		$http({ method:'DELETE', url:'/group/'+item.index }).success(function(data,status,headers,config){
@@ -172,7 +181,7 @@ $scope.showProductLimitTo = 4
 // USERS API
 
 	refreshUsersList = function() {
-		
+
 		$http({ method:'GET', url:'/user' }).success(function(data,status,headers,config){
 			if(data){
 				// console.log(data)
@@ -244,6 +253,11 @@ $scope.showProductLimitTo = 4
 		}
 	}
 
+	$scope.setDeleteUser = function(id) {
+		// send id to confirm
+		$scope.userToDelete = id
+	}
+
 	$scope.deleteUser = function(usrId){
 		console.log(usrId)
 		$http({ method:'DELETE', url:'/user/'+usrId}).success(function(data,status,headers,config){
@@ -255,6 +269,105 @@ $scope.showProductLimitTo = 4
 		})
 
 	}
+
+
+
+
+
+	refreshCarrouselList = function() {
+		console.log('entramos a carrousel')
+		$http({ method:'GET', url:'/carrousel' }).success(function(data,status,headers,config){
+			if(data){
+				$scope.groupCarrouselList = data
+			} else {
+				console.log('ERROR data')
+			}
+		})
+	}
+
+	$scope.saveItem = function(title, detail){
+		if(title !== undefined && title != "" && detail !== undefined && detail != ""){
+
+			$http({ method:'POST', url:'/carrousel',data:{title:title, detail:detail} }).success(function(data,status,headers,config){
+				if(data){
+					$scope.item_title = ""
+					$scope.item_detail = ""
+					refreshCarrouselList()
+				} else {
+					console.log('ERROR data')
+				}
+			})
+		} else {
+			console.log("data in blank")
+		}
+	}
+
+	$scope.editItem = function(id,title,detail){
+		$scope.item_title = title
+		$scope.item_detail = detail
+		$scope.item_id = id
+		$scope.btnItemSave = false
+		$scope.btnEditItemSave = true
+		$scope.btnItemCancel = true
+	}
+
+	cancelEditItemFn = function(){
+		$scope.item_title = ""
+		$scope.item_detail = ""
+		$scope.item_id = ""
+		$scope.btnItemSave = true
+		$scope.btnEditItemSave = false
+		$scope.btnItemCancel = false
+	}
+
+	$scope.cancelEditItem = function() {
+		cancelEditItemFn()
+	}
+
+	$scope.saveEditItem = function(itemId,title,detail){
+		if(title !== undefined && title != "" && detail !== undefined && detail != ""){
+
+			$http({ method:'PUT', url:'/carrousel/'+itemId,data:{title:title, detail:detail} }).success(function(data,status,headers,config){
+				if(data){
+					$scope.item_title = ""
+					$scope.item_detail = ""
+					$scope.item_id = ""
+					cancelEditItemFn()
+					refreshCarrouselList()
+				} else {
+					console.log('ERROR data')
+				}
+			})
+		} else {
+			console.log("data in blank")
+		}
+	}
+
+	$scope.setDeleteItem = function(id) {
+		// send id to confirm
+		$scope.itemToDelete = id
+	}
+
+	$scope.deleteItem = function(itemId){
+		console.log(itemId)
+		$http({ method:'DELETE', url:'/carrousel/'+itemId}).success(function(data,status,headers,config){
+			if(data){
+				refreshCarrouselList()
+			} else {
+				console.log('ERROR data')
+			}
+		})
+
+	}
+
+
+
+
+
+
+
+
+
 
 	$scope.editProduct = function(productId){
 		// console.log("edit "+productId)
@@ -281,11 +394,11 @@ $scope.showProductLimitTo = 4
 				console.log('ERROR data')
 			}
 		})
-	}	
+	}
 
 	$scope.productUpdateSave = function(id,group,subgroup,name,price,description,exist,outstanding,photos) {
 		console.log(id+' - '+group+' - '+subgroup+' - '+name+' - '+price+' - '+description+' - '+exist+' - '+outstanding+' - '+photos)
-		$http({ method:'PUT', url:'/product/'+id, 
+		$http({ method:'PUT', url:'/product/'+id,
 			data:{group:group,
 						subgroup:subgroup,
 						name:name,
@@ -326,6 +439,12 @@ $scope.showProductLimitTo = 4
 		$scope.productDescription = ""
 		$scope.productExist = ""
 		$scope.productOutstanding = ""
+	}
+
+	$scope.setDeleteProduct = function(id) {
+		// send id to confirm
+		console.log('si pasa el dato del producto ' + id)
+		$scope.productToDelete = id
 	}
 
 	$scope.deleteProduct = function(productId){

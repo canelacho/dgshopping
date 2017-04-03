@@ -6,16 +6,15 @@
 
 <% include ../views/partials/head %>
 
-	<title>Test</title>
-	<link rel="stylesheet" href="">
+	<title>Product Detail</title>
 </head>
-<body ng-controller="productDetail" ng-Cloak>
+<body ng-controller="productDetail" ng-cloak>
 
 <% include ../views/partials/header %>
 
 
 <main class="row">
-  
+
   <div class="row">
     <div class="col s12 m6">
       <div class="col s9">
@@ -28,14 +27,16 @@
       </div>
     </div>
     <div class="col s12 m6">
+			<span class="row" style="font-size:20px; color:#606060">Codigo: {{ productFinded._id }}</span>
       <span class="row" style="font-size:20px; color:#606060">{{ productFinded.subgroup }}</span>
       <span class="row" style="font-size:30px; color:#606060;">{{ productFinded.name }}</span>
-      <span class="row" style="font-size:25px; color:#959595">{{ productFinded.price | currency }}</span>
+      <span class="row" style="font-size:25px; color:#959595">Precio: {{ productFinded.price | currency }}</span>
       <hr>
+			<div class="row">Descripcion:</div>
       <div class="row">
         {{ productFinded.description }}
       </div>
-      
+
     </div>
   </div>
   <hr>
@@ -82,7 +83,7 @@
       <p>Recuerda que tambien nos puedes contactar en nuestras redes sociales <a href="https://www.facebook.com/Dgshopping-664861123630342/?fref=ts"><i class="fa fa-facebook-official"></i> Dgshopping</a> / <a href="https://www.instagram.com/dgshoppingpty/"><i class="fa fa-instagram" ></i> dgshoppingpty </a> ó a través de nuestro numeros WhatsApp <i class="material-icons">phone_iphone</i> (+507) 6240 9961 - 6328 7921</p>
     </div>
     <div class="modal-footer">
-      
+
       <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
       <a href="#!" class="modal-action waves-effect waves-green btn-flat ">Enviar</a>
     </div>

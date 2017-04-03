@@ -41,11 +41,11 @@ app.get('/private-access', function(req, res) {
 	res.render('login', { title: "Private Access - D&G Shopping" })
 })
 
-
 require('./routes/routes_products')(app)
 require('./routes/routes_users')(app)
 require('./routes/routes_groupSubgroup')(app)
 require('./routes/routes_private')(app)
+require('./routes/routes_carrousel')(app)
 
 // Every single page with path "app" have to be logged to show content
 app.use('/app', session_middleware)

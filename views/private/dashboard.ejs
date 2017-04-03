@@ -18,14 +18,14 @@
   <!-- <link rel="stylesheet" href="/css/font-awesome.min.css"> -->
 	<!-- own Css -->
 	<link rel="stylesheet" href="/css/private.css" type="text/css">
-	
+
 	<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Raleway:400,700,900" rel="stylesheet">
 
 	<title>Dashboard D&G Shopping</title>
-	
+
 </head>
 
-<body ng-controller="adminWeb" ng-Cloak>
+<body ng-controller="adminWeb" ng-cloak>
 
 <div class="info-users">Usuario: - <a href="closeSession"> Cerrar Sesión</a></div>
 <h3>Administrar Web</h3>
@@ -47,7 +47,7 @@
 					</div>
 					<div class="input-field col s12">
 				    <a class="waves-effect waves-light btn" ng-click="editGroup(groupSelected)" ng-show="btnEditGroup"><i class="material-icons">mode_edit</i> Editar</a>
-				    <a class="waves-effect waves-light btn" ng-click="deleteGroup(groupSelected)" ng-show="btnDeleteGroup"><i class="material-icons">delete_forever</i> Eliminar</a>
+				    <a class="waves-effect waves-light btn" href="#modal1" ng-show="btnDeleteGroup"><i class="material-icons">delete_forever</i> Eliminar</a>
 				    <a class="waves-effect  lwaves-light btn" ng-click="cancelGroup()" ng-show="btnCancelGroup"><i class="material-icons">cancel</i> Cancelar</a>
 				  </div>
 				</div>
@@ -57,9 +57,9 @@
 			      <input placeholder="Nombre del Grupo" id="group_name" type="text" class="validate" ng-model="groupName">
 			      <label for="group_name">Grupo</label>
 			    </div>
-					
+
 					<a class="waves-effect waves-light btn" ng-click="updateGroup(groupId)" ng-show="btnUpdateGroup" ng-value="groupId"><i class="material-icons">system_update_alt</i> Actualizar</a>
-					<a class="waves-effect waves-light btn" ng-click="createGroup(groupName,subGroupArray)" ng-show="btnCreateGroup" onClick="cleanChips()"><i class="material-icons">save</i> Crear</a>
+					<a class="waves-effect waves-light btn" ng-click="createGroup(groupName,subGroupArray)" ng-show="btnCreateGroup" onclick="cleanChips()"><i class="material-icons">save</i> Crear</a>
 				</div>
 				<div>Sub-Grupos</div>
 				<div id="chips" class="chips chips-initial"></div>
@@ -70,7 +70,7 @@
     <div id="expand" class="collapsible-header"><i class="material-icons">style</i> Producto</div>
     <div class="collapsible-body">
 			<div class="divinside">
-				
+
 				<form id="newProductForm"  method="POST" action="/product" enctype="multipart/form-data" >
 					<div>
 						<input ng-model="productIdEdit" ng-show="false">
@@ -130,7 +130,7 @@
 						<button  type="submit" class="waves-effect waves-light btn" ng-click="saveProduct()" ng-show="btnProductSave">
 							<i class="material-icons">save</i> Crear
 						</button>
-						
+
 						<a class=" waves-light green btn" ng-click="productUpdateSave(productIdEdit,groupsNewProuct,subGroupNewProduct,productName,productPrice,productDescription,productExist,productOutstanding, productPhotos)" ng-show="btnProductUpdate"><i class="material-icons">sync</i></a>
 			      <a class=" waves-light red btn" ng-show="btnProductCancel" ng-click="productUpdateCancel()"><i class="material-icons">cancel</i></a>
 					</div>
@@ -140,7 +140,55 @@
 			</div>
     </div>
   </li>
+
   <li>
+    <div class="collapsible-header"><i class="material-icons">subscriptions</i> Carrusel</div>
+    <div class="collapsible-body">
+    	<div class="divinside">
+
+    		<div class="row">
+			    <form class="col s12">
+			      <div class="row">
+			        <div class="input-field col s12">
+			          <input id="item_title" type="text" class="validate" ng-model="item_title">
+			          <label for="item_title">Titulo</label>
+			        </div>
+
+			        <div class="input-field col s12">
+			          <input id="item_description" type="text" class="validate" ng-model="item_detail">
+			          <label for="item_description">Descripcion</label>
+			        </div>
+			        <span ng-model="item_id"></span>
+
+			        <div class="col s12 m4">
+			        	<a class=" waves-light purple btn" ng-click="saveItem(item_title, item_detail)" ng-show="btnItemSave"><i class="material-icons">save</i></a>
+			        	<a class=" waves-light green btn" ng-click="saveEditItem(item_id,item_title,item_detail)" ng-show="btnEditItemSave"><i class="material-icons">sync</i></a>
+			        	<a class=" waves-light red btn" ng-show="btnItemCancel" ng-click="cancelEditItem()"><i class="material-icons">cancel</i></a>
+			        </div>
+			      </div>
+			    </form>
+			  </div>
+
+				<ul class="collection with-header">
+	        <li class="collection-header"><h4>Items actuales:</h4></li>
+
+	        <li class="collection-item" ng-repeat="item in groupCarrouselList">
+	        	<div>
+	        	{{ item.title }} : {{ item.detail }}
+	        		<a href="#modal4" ng-click="setDeleteItem(item._id)" class="secondary-content">
+								<i class="material-icons">delete_forever</i>
+		        	</a>
+		        	<a href="#!" class="secondary-content" ng-click="editItem(item._id,item.title,item.detail)">
+			        	<i class="material-icons">mode_edit</i>
+		        	</a>
+	        	</div>
+	        </li>
+	      </ul>
+    	</div>
+    </div>
+  </li>
+
+	<li>
     <div class="collapsible-header"><i class="material-icons">account_circle</i> Usuarios</div>
     <div class="collapsible-body">
     	<div class="divinside">
@@ -152,7 +200,7 @@
 			          <input id="user_name" type="text" class="validate" ng-model="user_name">
 			          <label for="user_name">Nombre Usuario</label>
 			        </div>
-		
+
 			        <div class="input-field col s12 m4">
 			          <input id="password" type="text" class="validate" ng-model="password">
 			          <label for="password">Password</label>
@@ -170,11 +218,11 @@
 
 				<ul class="collection with-header">
 	        <li class="collection-header"><h4>Listado de Usuarios:</h4></li>
-	        
+
 	        <li class="collection-item" ng-repeat="user in groupUsersList | orderBy:'name'">
 	        	<div>
 	        	{{ user.name }} : {{ user.password }}
-	        		<a href="#!" class="secondary-content" ng-click="deleteUser(user._id)">
+	        		<a href="#modal3" ng-click="setDeleteUser(user._id)" class="secondary-content">
 								<i class="material-icons">delete_forever</i>
 		        	</a>
 		        	<a href="#!" class="secondary-content" ng-click="editUser(user._id,user.name,user.password)">
@@ -182,10 +230,7 @@
 		        	</a>
 	        	</div>
 	        </li>
-
 	      </ul>
-            
-
     	</div>
     </div>
   </li>
@@ -217,19 +262,21 @@
 			<div class="row gallery-row">
 
 		      <div ng-repeat="product in productList | limitTo: showProductLimitTo | filter: searchByName | orderBy: '-date' track by $index" class="col s12 m4 l3 outstanding-product">
-		        
+
 		          <div class="padre-watch-product center-align">
 		            <img class="responsive-img" ng-src="../img/products/{{ product.photos[0] }}" alt="imagen de producto">
 		            <button class="waves-effect orange btn" ng-click="editProduct(product._id)">
 		              <span class="center-align">
-		                <i class="material-icons">mode_edit</i>          
+		                <i class="material-icons">mode_edit</i>
 		              </span>
 		            </button>
-		            <button class="waves-effect waves-light red btn" ng-click="deleteProduct(product._id)">
+								<a href="#modal2">
+		            <button class="waves-effect waves-light red btn" ng-click="setDeleteProduct(product._id)">
 		              <span class="center-align">
-		                <i class="material-icons">delete_forever</i>          
+		                <i class="material-icons">delete_forever</i>
 		              </span>
 		            </button>
+								</a>
 		          </div>
 		          <div class="center-align info-product">
 		            <span class="product-group">Grupo: {{ product.group }}</span><br>
@@ -238,19 +285,69 @@
 		            <span class="product-name">Detalle: {{ product.description | limitTo: 15 }}</span><br>
 		            <span class="product-price">Precio: {{ product.price | currency }}</span>
 		          </div>
-		        
+
 		      </div>
 
 		  </div>
 		</div>
 
-	</div>
-	
-
 </div>
 
 
-<!-- OLD LOAD 
+ <!-- Modal Trigger Delete Group & SubGroups-->
+ <!-- Modal Structure -->
+ <div id="modal1" class="modal">
+	 <div class="modal-content">
+		 <h4>Estas seguro que desea</h4>
+		 <p>Eliminar el Group y SubGrupos seleccionado ?</p>
+	 </div>
+	 <div class="modal-footer">
+		 <a href="#!" ng-click="deleteGroup(groupSelected)" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+		 <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
+	 </div>
+ </div>
+
+  <!-- Modal Trigger Delete Product -->
+	<!-- Modal Structure -->
+	<div id="modal2" class="modal">
+		<div class="modal-content">
+			<h4>Estas seguro que desea</h4>
+			<p>Eliminar el Producto seleccionado ?</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#!"  ng-click="deleteProduct(productToDelete)" ng-value="productToDelete" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+			<a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
+		</div>
+	</div>
+
+  <!-- Modal Trigger Delete Users -->
+  <!-- Modal Structure -->
+  <div id="modal3" class="modal">
+ 	 <div class="modal-content">
+ 		 <h4>Estas seguro que desea</h4>
+ 		 <p>Eliminar el usuario seleccionado ?</p>
+ 	 </div>
+ 	 <div class="modal-footer">
+ 		 <a href="#!" ng-click="deleteUser(userToDelete)" ng-value="userToDelete" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+ 		 <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
+ 	 </div>
+  </div>
+
+	<!-- Modal Trigger Delete Users -->
+	<!-- Modal Structure -->
+	<div id="modal4" class="modal">
+	 <div class="modal-content">
+		 <h4>Estas seguro que desea</h4>
+		 <p>Eliminar el item seleccionado ?</p>
+	 </div>
+	 <div class="modal-footer">
+		 <a href="#!" ng-click="deleteItem(itemToDelete)" ng-value="itemToDelete" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+		 <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
+	 </div>
+	</div>
+
+
+<!-- OLD LOAD
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/js/materialize.min.js"></script> -->
 
@@ -269,8 +366,8 @@
 
 
 <script>
-	
-	var itemsSubGroup = [] 
+
+	var itemsSubGroup = []
 
 	$(document).ready(function() {
     $('select').material_select()
@@ -285,7 +382,7 @@
   })
 
   expand = function(){
-  	document.getElementById("expand").click() 
+  	document.getElementById("expand").click()
   }
 
 
@@ -366,11 +463,18 @@ var file,
 
 				destination.appendChild(img)
 			}
-			
+
 			reader.readAsDataURL(file)
 		}
 	}
 })
+
+
+// modal initialization
+$(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
 
 </script>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="generalView">
 <head>
-	
+
   <% include ../views/partials/head %>
 
 	<title><%= title %></title>
@@ -58,12 +58,12 @@
 
 
       <div ng-repeat="product in productList | filter: searchByName | limitTo: valueLimitTo | orderBy: '-date' track by $index" class="col s12 m4 l3 outstanding-product" ng-show="product.exist">
-        
+
         <div class="padre-watch-product">
           <img class="responsive-img" ng-src="img/products/{{ product.photos[0] }}" alt="imagen de producto">
           <a href="product_detail/{{ product._id }}">
             <span class="center-align watch-product">
-              Ver Detalle          
+              Ver Detalle
             </span>
           </a>
         </div>
@@ -73,7 +73,7 @@
           <span class="product-price">{{ product.price | currency }}</span>
           <br><span class="product-price">{{ product.date }}</span>
         </div>
-        
+
       </div>
     </div>
 
@@ -82,27 +82,26 @@
 
       <button class="waves-effect waves-light btn" ng-click="showMoreProducts()" style="margin-top:40px" title="Mostrar mas productos">
         <span class="">
-          <i class="material-icons">add_box</i>      
+          <i class="material-icons">add_box</i>
         </span>
 
-      </button> 
+      </button>
 
       <button class="waves-effect waves-light btn" ng-click="showLessProducts()" style="margin-top:40px"  title="Mostrar menos productos">
         <span class="">
-          <i class="material-icons">indeterminate_check_box</i>     
+          <i class="material-icons">indeterminate_check_box</i>
         </span>
 
-      </button> 
+      </button>
 
       <button class="waves-effect waves-light btn" ng-click="showAllProducts()" style="margin-top:40px" title="Mostrar todos los productos">
         <span class="">
-           <i class="material-icons">all_inclusive</i>      
+           <i class="material-icons">all_inclusive</i>
         </span>
 
-      </button> 
+      </button>
     </div>
 
-      
 
   </div>
 
@@ -111,18 +110,12 @@
     </div>
   </div>
 
-  <div class="row contact-info">
-    <h5 class="center-align">PARA VENTAS AL MAYOR puedes contactarnos a través de: <a href="#modalContact" style="color:#4da197">contacto@dgshopping.com</a></h5>
-    <p class="center-align">HORARIO DE ATENCIÓN DE LUNES A VIERNES de 8 AM a 6 PM - SÁBADO DE 9 AM a 4 PM.</p>
-
-    <% include ../views/partials/modal_contact %>
-    
-  </div>
 
 </main>
 
 
 <% include ../views/partials/footer %>
+<!-- convoke modal_Contact  -->
 
 
 <script src="/ctrllerPublicProducts.js"></script>
