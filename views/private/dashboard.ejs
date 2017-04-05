@@ -130,13 +130,10 @@
 						<button  type="submit" class="waves-effect waves-light btn" ng-click="saveProduct()" ng-show="btnProductSave">
 							<i class="material-icons">save</i> Crear
 						</button>
-
 						<a class=" waves-light green btn" ng-click="productUpdateSave(productIdEdit,groupsNewProuct,subGroupNewProduct,productName,productPrice,productDescription,productExist,productOutstanding, productPhotos)" ng-show="btnProductUpdate"><i class="material-icons">sync</i></a>
 			      <a class=" waves-light red btn" ng-show="btnProductCancel" ng-click="productUpdateCancel()"><i class="material-icons">cancel</i></a>
 					</div>
 				</form>
-
-
 			</div>
     </div>
   </li>
@@ -147,22 +144,35 @@
     	<div class="divinside">
 
     		<div class="row">
-			    <form class="col s12">
+			    <form id="newCarrouselForm"  method="POST" action="/carrousel" enctype="multipart/form-data" >
 			      <div class="row">
 			        <div class="input-field col s12">
-			          <input id="item_title" type="text" class="validate" ng-model="item_title">
+			          <input id="item_title" type="text" class="validate" ng-model="item_title" name="item_title">
 			          <label for="item_title">Titulo</label>
 			        </div>
 
 			        <div class="input-field col s12">
-			          <input id="item_description" type="text" class="validate" ng-model="item_detail">
+			          <input id="item_description" type="text" class="validate" ng-model="item_detail" name="item_detail">
 			          <label for="item_description">Descripcion</label>
 			        </div>
-			        <span ng-model="item_id"></span>
+							<span ng-model="item_id"></span>
+
+							<div class="col s12">
+								<div class="file-field input-field">
+						      <div class="btn">
+						        <span>Foto</span>
+						        <input type="file" id="photoCarrousel" name="fieldphotoCarrousel">
+						      </div>
+						      <div class="file-path-wrapper">
+						        <input class="file-path validate" type="text" placeholder="Cargar una imagen" name="fieldphotoCarrousel" ng-model="photoCarrousel">
+						      </div>
+						    </div>
+							</div>
+							<div id="destinationCarrousel"></div>
 
 			        <div class="col s12 m4">
-			        	<a class=" waves-light purple btn" ng-click="saveItem(item_title, item_detail)" ng-show="btnItemSave"><i class="material-icons">save</i></a>
-			        	<a class=" waves-light green btn" ng-click="saveEditItem(item_id,item_title,item_detail)" ng-show="btnEditItemSave"><i class="material-icons">sync</i></a>
+			        	<button type="submit" class=" waves-light purple btn" ng-click="saveItem(item_title, item_detail,photoCarrousel)" ng-show="btnItemSave"><i class="material-icons">save</i></a>
+			        	<a class=" waves-light green btn" ng-click="saveEditItem(item_id,item_title,item_detail,photoCarrousel)" ng-show="btnEditItemSave"><i class="material-icons">sync</i></a>
 			        	<a class=" waves-light red btn" ng-show="btnItemCancel" ng-click="cancelEditItem()"><i class="material-icons">cancel</i></a>
 			        </div>
 			      </div>
@@ -173,8 +183,10 @@
 	        <li class="collection-header"><h4>Items actuales:</h4></li>
 
 	        <li class="collection-item" ng-repeat="item in groupCarrouselList">
-	        	<div>
-	        	{{ item.title }} : {{ item.detail }}
+	        	<div class="row">
+							<img class="responsive-img col s12" ng-src="../img/carrousel/{{ item.picture }}" alt="imagen de carrousel" />
+							<div class="col s12">Titulo: {{ item.title }} </div>
+							<div class="col s12">Detalle: {{ item.detail }} </div>
 	        		<a href="#modal4" ng-click="setDeleteItem(item._id)" class="secondary-content">
 								<i class="material-icons">delete_forever</i>
 		        	</a>
@@ -333,7 +345,7 @@
  	 </div>
   </div>
 
-	<!-- Modal Trigger Delete Users -->
+	<!-- Modal Trigger Delete Items on Carrousel -->
 	<!-- Modal Structure -->
 	<div id="modal4" class="modal">
 	 <div class="modal-content">
@@ -438,14 +450,19 @@
 	  })
   }
 
+// modal initialization
+$(document).ready(function(){
+  // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+  $('.modal').modal();
+});
+
+
+
 // upload imgs
 document.getElementById('photos').addEventListener('change', function() {
 var file,
 		destination = document.getElementById('destination')
 		destination.innerHTML = ''
-
-		console.log('mostrando destination')
-		console.log(destination)
 
 	// Looping in case they uploaded multiple files
 	for(var x = 0, xlen = this.files.length; x < xlen; x++) {
@@ -470,11 +487,31 @@ var file,
 })
 
 
-// modal initialization
-$(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal').modal();
-  });
+// upload img Carrousel
+document.getElementById('photoCarrousel').addEventListener('change', function() {
+var fileCarrousel,
+		destination = document.getElementById('destinationCarrousel')
+		destination.innerHTML = ''
+
+	// Looping in case they uploaded multiple files
+		fileCarrousel = this.files[0]
+		console.log('fileCarrousel: ' +  JSON.stringify(fileCarrousel, null, 2))
+		if(fileCarrousel.type.indexOf('image') != -1) { // Very primitive "validation"
+
+			var reader = new FileReader()
+
+			reader.onload = function(e) {
+				var img = new Image()
+				img.src = e.target.result // File contents here
+				img.width = 180
+				img.style = "margin:10px"
+				destination.appendChild(img)
+			}
+
+			reader.readAsDataURL(fileCarrousel)
+		}
+
+})
 
 </script>
 

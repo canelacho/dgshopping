@@ -39,11 +39,11 @@ $scope.showAllProducts = function(){
 }])
 
 app.controller('navController', ['$scope','$http','$window', function($scope,$http,$window) {
-	
+
 	var loadGroupList = function(){
 		$http({method:'GET',url:'/group'}).success(function(data,status,headers,config) {
 			if(data){
-				$scope.groupList = createList(data) 
+				$scope.groupList = createList(data)
 			} else {
 				console.log('ERROR data')
 			}
@@ -58,11 +58,22 @@ app.controller('navController', ['$scope','$http','$window', function($scope,$ht
 				for(var e=0;e<data[i].subgroupitems.length;e++){
 			 		newData.push(data[i].subgroupitems[e])
 				}
-			}	
+			}
 		}
 		return newData
 	}
 
+	var loadCarrousel  = function() {
+		$http({method:'GET',url:'/carrousel'}).success(function(data,status,headers,config) {
+			if(data){
+				$scope.carrousel = data
+			} else {
+				console.log('ERROR data')
+			}
+		})
+	}
+
 	loadGroupList()
+	loadCarrousel()
 
 }])

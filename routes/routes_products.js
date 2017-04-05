@@ -34,7 +34,7 @@ var product = require('../models/product'),
 	addProduct = function(req, res, next) {
 
 		console.log(req.body)
-		
+
 		var photos = []
 		for(var i in req.files) {
 		    photos.push(req.files[i].filename)
@@ -66,7 +66,7 @@ var product = require('../models/product'),
 	editProduct = function(req, res) {
 
 		product.findById(req.params.id, function(err, productFinded) {
-			
+
 			var photos = productFinded.photos
 			if(req.files) {
 				for(var i in req.files) {
@@ -102,7 +102,7 @@ var product = require('../models/product'),
 		      	console.log(err)
 		      }
 	      	console.log('file deleted successfully on row :' + i )
-		  	}) 
+		  	})
 			}
 
 			productFinded.remove(function(err) {
@@ -112,7 +112,7 @@ var product = require('../models/product'),
 				else console.log('ERROR: ' + err)
 			})
 		})
-		
+
 		res.send('Product deleted!')
 	}
 
@@ -147,7 +147,7 @@ var product = require('../models/product'),
 
       console.log('file deleted successfully')
     	res.send('File deleted successfully')
-	  }) 
+	  })
 	}
 
 	// API ROUTES
@@ -156,6 +156,6 @@ var product = require('../models/product'),
 	app.post('/product', upload.any(), addProduct)
 	app.put('/product/:id', upload.any(), editProduct)
 	app.delete('/product/:id', deleteProduct)
-
+  // remove photo by photo
 	app.delete('/product/:product/:photo', deletePhoto)
 }

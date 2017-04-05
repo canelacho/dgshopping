@@ -1,6 +1,18 @@
 module.exports = function(app){
 
-  	var item = require('../models/carrousel')
+  	var item = require('../models/carrousel'),
+    		fs = require('fs'),
+    		multer = require('multer'),
+    		storage = multer.diskStorage({
+    		  destination: function (req, file, cb) {
+    		    cb(null, './public/img/carrousel/')
+    		  },
+    		  filename: function (req, file, cb) {
+    		    cb(null, file.fieldname + '-' + Date.now() + '.' + file.originalname.split('.').pop())
+    		  }
+    		}),
+    		upload = multer({ storage: storage })
+
 
   	// GET ALL
   	var findItems = function(req, res) {
@@ -19,13 +31,19 @@ module.exports = function(app){
   	}
 
   	// POST
-  	var addItem = function(req, res) {
+  	var addItem = function(req, res, next) {
+      console.log(storage.filename)
+      console.log('req.files: ' + req.files)
+      var photos = []
+  		for(var i in req.files) {
+  		    photos.push(req.files[i].filename)
+  		}
+      console.log('fotos: ' + photos)
 
-      console.log("llegando con la data postman: " +req.body.title)
   		var newItem = new item({
-  			title: req.body.title,
-  			detail: req.body.detail,
-        picture: req.body.picture
+  			title: req.body.item_title,
+  			detail: req.body.item_detail,
+        picture: photos[0]
   		});
 
   		console.log(newItem);
@@ -35,7 +53,8 @@ module.exports = function(app){
   			else console.log('ERROR saving new item: ' + err);
   		});
 
-  		res.send(newItem);
+      // res.send(newItem)
+  		res.render('private/dashboard')
   	}
 
   	// PUT
@@ -70,7 +89,7 @@ module.exports = function(app){
   // API ROUTES
   app.get('/carrousel', findItems)
   app.get('/carrousel/:id', findById)
-  app.post('/carrousel', addItem)
+  app.post('/carrousel', upload.any(), addItem)
   app.put('/carrousel/:id', editItem)
   app.delete('/carrousel/:id', deleteItem)
 

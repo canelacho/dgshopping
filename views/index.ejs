@@ -10,29 +10,27 @@
 
 <% include ../views/partials/header %>
 
-
 <!-- CARROUSE  -->
   <div class="row">
     <div class="carousel carousel-slider center" data-indicators="true">
-      <!-- <div class="carousel-fixed-item center">
-        <a class="btn waves-effect white grey-text darken-text-2">button</a>
-      </div -->
-      <div class="carousel-item white-text img-carousel1" >
-        <h2 style="font-size: 45px;">Protector para Mandos</h2>
-        <p class="white-text" style="font-size: 25px; font-family: 'Indie Flower', cursive;">En diferentes colores!</p>
-      </div>
-      <div class="carousel-item white-text img-carousel2" >
-        <h2 style="font-size: 45px;">Gran variedad de productos</h2>
-        <p class="white-text" style="font-size: 25px; font-family: 'Indie Flower', cursive;">Para todas las marcas!</p>
-      </div>
-      <div class="carousel-item white-text img-carousel3">
-        <h2 style="font-size: 45px;">Materiales de Calidad</h2>
-        <p class="white-text" style="font-size: 25px; font-family: 'Indie Flower', cursive;">Duraderos</p>
-      </div>
-      <div class="carousel-item white-text img-carousel4" >
-        <h2 style="font-size: 45px;">Protección y Color</h2>
-        <p class="white-text" style="font-size: 25px; font-family: 'Indie Flower', cursive;">Que tus llaves hagan juego siempre!</p>
-      </div>
+
+    <div class="carousel-item white-text img-carousel1" ng-style="{'background-image':'url(../img/carrousel/' + carrousel[0].picture + ')'}">
+        <h2 style="font-size: 45px;">{{ carrousel[0].title }}</h2>
+        <p class="white-text" style="font-size: 25px; font-family: 'Indie Flower', cursive;">{{ carrousel[0].detail }}</p>
+    </div>
+    <div class="carousel-item white-text img-carousel1" ng-style="{'background-image':'url(../img/carrousel/' + carrousel[1].picture + ')'}">
+        <h2 style="font-size: 45px;">{{ carrousel[1].title }}</h2>
+        <p class="white-text" style="font-size: 25px; font-family: 'Indie Flower', cursive;">{{ carrousel[1].detail }}</p>
+    </div>
+    <div class="carousel-item white-text img-carousel1" ng-style="{'background-image':'url(../img/carrousel/' + carrousel[2].picture + ')'}">
+        <h2 style="font-size: 45px;">{{ carrousel[2].title }}</h2>
+        <p class="white-text" style="font-size: 25px; font-family: 'Indie Flower', cursive;">{{ carrousel[2].detail }}</p>
+    </div>
+    <div class="carousel-item white-text img-carousel1" ng-style="{'background-image':'url(../img/carrousel/' + carrousel[3].picture + ')'}">
+        <h2 style="font-size: 45px;">{{ carrousel[3].title }}</h2>
+        <p class="white-text" style="font-size: 25px; font-family: 'Indie Flower', cursive;">{{ carrousel[3].detail }}</p>
+    </div>
+
     </div>
   </div>
 <!-- CARROUSE  -->

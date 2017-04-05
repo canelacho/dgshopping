@@ -275,7 +275,6 @@ $scope.showProductLimitTo = 4
 
 
 	refreshCarrouselList = function() {
-		console.log('entramos a carrousel')
 		$http({ method:'GET', url:'/carrousel' }).success(function(data,status,headers,config){
 			if(data){
 				$scope.groupCarrouselList = data
@@ -286,20 +285,22 @@ $scope.showProductLimitTo = 4
 	}
 
 	$scope.saveItem = function(title, detail){
-		if(title !== undefined && title != "" && detail !== undefined && detail != ""){
-
-			$http({ method:'POST', url:'/carrousel',data:{title:title, detail:detail} }).success(function(data,status,headers,config){
-				if(data){
-					$scope.item_title = ""
-					$scope.item_detail = ""
-					refreshCarrouselList()
-				} else {
-					console.log('ERROR data')
-				}
-			})
-		} else {
-			console.log("data in blank")
-		}
+		// if(title !== undefined && title != "" && detail !== undefined && detail != ""){
+		//
+		// 	$http({ method:'POST', url:'/carrousel',data:{title:title, detail:detail} }).success(function(data,status,headers,config){
+		// 		if(data){
+		// 			$scope.item_title = ""
+		// 			$scope.item_detail = ""
+		// 			$scope.photoCarrousel = ""
+		// 			refreshCarrouselList()
+		// 		} else {
+		// 			console.log('ERROR data')
+		// 		}
+		// 	})
+		// } else {
+		// 	console.log("data in blank")
+		// }
+		console.log('entramos sin hacer nada en angular')
 	}
 
 	$scope.editItem = function(id,title,detail){
@@ -359,10 +360,6 @@ $scope.showProductLimitTo = 4
 		})
 
 	}
-
-
-
-
 
 
 
