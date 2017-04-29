@@ -1,5 +1,6 @@
 node_modules/*
 testKeyPair.pem
+dgshopping.pem
 querys.js
 .DS_Store
 public/img/*
