@@ -10,6 +10,7 @@
 
 <% include ../views/partials/header %>
 
+
 <!-- CARROUSE  -->
   <div class="row">
     <div class="carousel carousel-slider center" data-indicators="true">
@@ -40,20 +41,18 @@
 
   <div class="row">
     <div class="row">
-      <h3 class="col s12">PRODUCTOS DESTACADOS</h3>
+      <h3 class="col s12 center-align">PRODUCTOS DESTACADOS</h3>
     </div>
 
-    <div class="row">
+<!--     <div class="row">
       <div class="input-field col s12 m6">
         <i class="material-icons prefix">search</i>
         <input placeholder="" id="icon_prefix" type="text" class="validate" ng-model="searchByName">
         <label for="icon_prefix">Filtrar busqueda por Nombre, Palabra, Precio...</label>
       </div>
-
-    </div>
+    </div> -->
 
     <div class="row gallery-row">
-
 
       <div ng-repeat="product in productList | filter: searchByName | limitTo: valueLimitTo | orderBy: '-date' track by $index" class="col s12 m4 l3 outstanding-product" ng-show="product.exist">
 
@@ -73,31 +72,6 @@
         </div>
 
       </div>
-    </div>
-
-    <div class="row center-align">
-
-
-      <button class="waves-effect waves-light btn" ng-click="showMoreProducts()" style="margin-top:40px" title="Mostrar mas productos">
-        <span class="">
-          <i class="material-icons">add_box</i>
-        </span>
-
-      </button>
-
-      <button class="waves-effect waves-light btn" ng-click="showLessProducts()" style="margin-top:40px"  title="Mostrar menos productos">
-        <span class="">
-          <i class="material-icons">indeterminate_check_box</i>
-        </span>
-
-      </button>
-
-      <button class="waves-effect waves-light btn" ng-click="showAllProducts()" style="margin-top:40px" title="Mostrar todos los productos">
-        <span class="">
-           <i class="material-icons">all_inclusive</i>
-        </span>
-
-      </button>
     </div>
 
 
