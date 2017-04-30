@@ -21,22 +21,33 @@ $scope.showAllProducts = function(){
 	$scope.valueLimitTo = cntProducts
 }
 
-	var loadProductList = function(){
-		$http({method:'GET',url:'/product'}).success(function(data,status,headers,config) {
-			if(data){
-				$scope.productList = data
-				// set cnt of products on db
-				cntProducts = data.length
-				$scope.valueLimitTo = 8
-			} else {
-				console.log('ERROR data')
+var loadProductList = function(){
+	$http({method:'GET',url:'/product'}).success(function(data,status,headers,config) {
+		if(data){
+			$scope.productList = data
+			console.log(data)
+			var newData = []
+			for(var i=0;i<data.length;i++){
+				if (data[i].outstanding){
+					newData.push(data[i])
+				}
 			}
-		})
-	}
+			$scope.productOutstanding = newData
+			console.log(newData)
+			// set cnt of products on db
+			cntProducts = data.length
+			$scope.valueLimitTo = 28
+		} else {
+			console.log('ERROR data')
+		}
+	})
+}
 
-	loadProductList()
+loadProductList()
 
 }])
+
+
 
 app.controller('navController', ['$scope','$http','$window', function($scope,$http,$window) {
 

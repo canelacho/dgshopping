@@ -1,17 +1,17 @@
 <footer class="row">
     <div class="footer-links">
-      <a href="#">Condiciones de entrega</a> - 
-      <a href="#">Bienvenidos</a> - 
-      <a href="#">Quienes somos</a> - 
-      <a href="#">Contacto</a> - 
-      <a href="#">Modos de pago</a>
+      <a href="#" class="deathlinks">Condiciones de entrega</a> - 
+      <a href="#" class="deathlinks">Bienvenidos</a> - 
+      <a href="#" class="deathlinks">Quienes somos</a> - 
+      <a href="#" class="deathlinks">Contacto</a> - 
+      <a href="#" class="deathlinks">Modos de pago</a>
     </div>
     <div class="footer-socialmedia center">
       <a href="https://www.facebook.com/Dgshopping-664861123630342/?fref=ts" target="blank">
         <i class="fa fa-facebook-official" style="font-size:38px; padding-right:5px" aria-hidden="true" target="blank"></i>facebook
       </a>
       &nbsp &nbsp &nbsp &nbsp
-      <a href="https://www.instagram.com/dgshoppingpty/">
+      <a href="https://www.instagram.com/dgshoppingpty/" target="blank">
         <i class="fa fa-instagram" style="font-size:38px" aria-hidden="true"></i> instagram
       </a>
     </div>
@@ -36,4 +36,14 @@
       $('.modal').modal();
 
     });
+
+  $('.deathlinks').on('click',function(e){
+    e.preventDefault();
+  })
+  
+  // document.querySelector("#id-a1").addEventListener("click", function(event){
+  //     alert("preventDefault will stop you from checking this checkbox!")
+  //     event.preventDefault();
+  // }, false);
+
 </script>
