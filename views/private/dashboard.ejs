@@ -253,27 +253,42 @@
 	<div class="container">
 
 		<div class="row">
-		  <div class="input-field col s12 m6">
+		  <div class="input-field col s12 m4">
 		    <i class="material-icons prefix">search</i>
 		    <input id="icon_prefix" type="text" class="validate" ng-model="searchByName">
 		    <label for="icon_prefix">Filtrar busqueda</label>
 		  </div>
+		  
+			<div class="input-field col s12 m6">
+		  	<span>
+		  		<input type="checkbox" id="Destacados" ng-model="product.outstanding" />
+      		<label for="Destacados">Destacados</label>
+		    </span>
+		    <span>
+		    	<input type="checkbox" id="Disponibles" ng-model="product.exist" ng-checked="true" />
+      		<label for="Disponibles">Disponibles</label>
+		    </span>
+ <br>
+		  </div>
+		 
 
-		  <div class="input-field col s12 m6">
+		  <div class="input-field col s12 m2">
 				<select name="limitTo" class="select" ng-model="showProductLimitTo" material-select watch>
 		        <option  value="4" selected>4</option>
 		        <option  value="8" >8</option>
 		        <option  value="12" >12</option>
 		        <option  value="all" >Todos</option>
 		    </select>
-		    <label for="limitTo">Mostrar Ultimos ...</label>
+		    <label for="limitTo">Mostrar por ...</label>
 			</div>
+
 		</div>
 
+		
 		<div class="row">
 			<div class="row gallery-row">
 
-		      <div ng-repeat="product in productList | limitTo: showProductLimitTo | filter: searchByName | orderBy: '-date' track by $index" class="col s12 m4 l3 outstanding-product">
+		      <div ng-repeat="product in productList | limitTo: showProductLimitTo | filter: (searchByName || product.outstanding || product.exist ) | orderBy: '-date' track by $index" class="col s12 m4 l3 outstanding-product">
 
 		          <div class="padre-watch-product center-align">
 		            <img class="responsive-img" ng-src="../img/products/{{ product.photos[0] }}" alt="imagen de producto">
@@ -295,7 +310,10 @@
 		            <span class="product-name">id: {{ product._id }}</span><br>
 		            <span class="product-name">Nombre: {{ product.name }}</span><br>
 		            <span class="product-name">Detalle: {{ product.description | limitTo: 15 }}</span><br>
-		            <span class="product-price">Precio: {{ product.price | currency }}</span>
+		            <span class="product-price">Precio: {{ product.price | currency }}</span><br>
+		            <span class="product-price">Disponible: {{ product.exist }}</span><br>
+		            <span class="product-price">Destacado: {{ product.outstanding }}</span>
+
 		          </div>
 
 		      </div>

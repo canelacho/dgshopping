@@ -4,7 +4,8 @@ app.controller('adminWeb', ['$scope','$http','$window', function($scope,$http,$w
 // JSON.stringify(groupSelected, null, 2)
 var groupList = {}
 
-$scope.showProductLimitTo = 4
+$scope.showProductLimitTo = 8
+
 
 	loadPage = function() {
 		$scope.btnProductSave = true

@@ -25,7 +25,6 @@ var loadProductList = function(){
 	$http({method:'GET',url:'/product'}).success(function(data,status,headers,config) {
 		if(data){
 			$scope.productList = data
-			console.log(data)
 			var newData = []
 			for(var i=0;i<data.length;i++){
 				if (data[i].outstanding){
@@ -33,10 +32,9 @@ var loadProductList = function(){
 				}
 			}
 			$scope.productOutstanding = newData
-			console.log(newData)
 			// set cnt of products on db
 			cntProducts = data.length
-			$scope.valueLimitTo = 28
+			$scope.valueLimitTo = 100
 		} else {
 			console.log('ERROR data')
 		}
