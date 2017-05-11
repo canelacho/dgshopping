@@ -32,6 +32,7 @@ var loadProductList = function(){
 				}
 			}
 			$scope.productOutstanding = newData
+			$scope.productList = newData
 			// set cnt of products on db
 			cntProducts = data.length
 			$scope.valueLimitTo = 100
