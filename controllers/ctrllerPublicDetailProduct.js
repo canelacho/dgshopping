@@ -9,7 +9,6 @@ var loadProductDetail = function(){
 	$http({ method:'GET',url:'/product/' + idProduct }).success(function(data,status,headers,config) {
 		if(data){
 			$scope.productFinded = data 
-			console.log(data)
 		} else {
 			console.log('ERROR data')
 		}

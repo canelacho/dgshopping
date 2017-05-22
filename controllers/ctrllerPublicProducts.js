@@ -48,30 +48,34 @@ loadProductList()
 
 
 
-app.controller('navController', ['$scope','$http','$window', function($scope,$http,$window) {
+app.controller('navController', ['$scope','$http','$window','$location', function($scope,$http,$window,$location) {
 
 	var loadGroupList = function(){
 		$http({method:'GET',url:'/group'}).success(function(data,status,headers,config) {
 			if(data){
-				$scope.groupList = createList(data)
+				//$scope.groupList = createList(data)
+				$scope.groupList = data
 			} else {
 				console.log('ERROR data')
 			}
 		})
 	}
 
-	var createList = function(data){
-		var newData = []
-		for(var i=0;i<data.length;i++){
-			newData.push(data[i].groupname)
-			if(data[i].subgroupitems.length > 0){
-				for(var e=0;e<data[i].subgroupitems.length;e++){
-			 		newData.push(data[i].subgroupitems[e])
-				}
+
+	$scope.findbysubgroup = function(subgroup){
+		console.log('el subgrupo a buscar ' +subgroup)
+
+		$http({method:'GET',url:'/search/'+subgroup}).success(function(data, status, headers, config){
+			if(data){
+				$scope.subgroupfinded = data[0].id
+				$scope.subgroupitemsfinded = data[1]
+			} else {
+				console.log('ERRR data')
 			}
-		}
-		return newData
+		})
+
 	}
+
 
 	var loadCarrousel  = function() {
 		$http({method:'GET',url:'/carrousel'}).success(function(data,status,headers,config) {
@@ -85,5 +89,33 @@ app.controller('navController', ['$scope','$http','$window', function($scope,$ht
 
 	loadGroupList()
 	loadCarrousel()
+
+
+	// draw nav buttons of subgroups and expand list
+	$scope.expand = function(groupname) {
+
+		function findSubGrup (groupname) {
+			var newArra = []
+			for(var i=0;i< $scope.groupList.length; i++) {
+				if ($scope.groupList[i].groupname == groupname ) {
+					newArray = $scope.groupList[i].subgroupitems
+				}
+			}
+			return newArray
+		}
+
+		$scope.showsubgroup = true
+		
+		$scope.subGroupActiveList = findSubGrup(groupname)
+
+	}
+
+	$scope.markview = function(){
+		var url = $location.$$absUrl
+		var palabra = url.split("/")
+		palabra = palabra[palabra.length - 1]
+		console.log(palabra)
+		return palabra
+	}()
 
 }])

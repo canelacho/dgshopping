@@ -34,8 +34,8 @@ app.get('/product_detail/:id', function(req, res) {
 	res.render('product_detail', { title: "D&G Shopping - Producto" })
 })
 
-app.get('/como_comprar', function(req, res) {
-	res.render('como_comprar', { title: "D&G Shopping - Como comprar" })
+app.get('/search', function(req, res) {
+	res.render('search')
 })
 
 app.get('/private-access', function(req, res) {
@@ -47,6 +47,8 @@ require('./routes/routes_users')(app)
 require('./routes/routes_groupSubgroup')(app)
 require('./routes/routes_private')(app)
 require('./routes/routes_carrousel')(app)
+require('./routes/routes_search_subgroup')(app)
+
 
 // Every single page with path "app" have to be logged to show content
 app.use('/app', session_middleware)

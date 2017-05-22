@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="generalView">
+<head>
+
+  <% include ../views/partials/head %>
+
+	<title>Items encontrados</title>
+</head>
+<body ng-controller="navController">
+
+<% include ../views/partials/header %>
+
+
+<main ng-controller="list-products" ng-Cloak>
+
+
+  <div class="row">
+
+  <div class="subgroupfinded">Encontrados para: <b>{{ subgroupfinded }}</b></div>
+
+
+<!--     <div class="row">
+      <div class="input-field col s12 m6">
+        <i class="material-icons prefix">search</i>
+        <input placeholder="" id="icon_prefix" type="text" class="validate" ng-model="searchByName">
+        <label for="icon_prefix">Filtrar busqueda por Nombre, Palabra, Precio...</label>
+      </div>
+    </div> -->
+
+    <div class="row gallery-row">
+
+
+      <div ng-repeat="product in subgroupitemsfinded | filter: (product.subgroup = subgroupfinded )| filter: searchByName  | orderBy: '-date' track by $index" class="col s12 m4 l3 outstanding-product" ng-show="product.exist">
+
+        <div class="padre-watch-product">
+          <img class="responsive-img" ng-src="../img/products/{{ product.photos[0] }}" alt="Imagen del producto">
+          <a href="../product_detail/{{ product._id }}">
+            <span class="center-align watch-product">
+              Ver Detalle
+            </span>
+          </a>
+        </div>
+        <div class="center-align info-product">
+          <span class="product-group">{{ product.group }}</span><br>
+          <span class="product-name">{{ product.name }}</span><br>
+          <span class="product-price">{{ product.price | currency }}</span><br>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+</main>
+
+
+<% include ../views/partials/footer %>
+<!-- call modal_Contact  -->
+<% include ../views/partials/modal_info.ejs %>
+
+<script src="/ctrllerPublicProducts.js"></script> 
+
+</body>
+</html>

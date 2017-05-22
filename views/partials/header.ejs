@@ -70,42 +70,26 @@
     </a>
   </div>
   <div class="row hide-on-med-and-up" style="margin-bottom: -10px">
-      <div class="input-field col s10 offset-s1">
-        <i class="material-icons prefix">search</i>
-        <input placeholder="" id="icon_prefix" type="text" class="validate" ng-model="searchByName">
-        <label for="icon_prefix">BUSCAR</label>
-      </div>
+    <div class="input-field col s10 offset-s1">
+      <i class="material-icons prefix">search</i>
+      <input placeholder="" id="icon_prefix" type="text" class="validate" ng-model="searchByName">
+      <label for="icon_prefix">BUSCAR</label>
     </div>
-      
-  <div class="med-nav">
-    <nav>
-      <div class="nav-wrapper grey">
-        <!-- <a href="#!" class="brand-logo">Menu</a> -->
-        <a href="#" data-activates="mobile-view" class="button-collapse"><i class="material-icons">menu</i></a>
-        <ul class="left hide-on-med-and-down">
-          <!-- <li><a href="/">Home</a></li> -->
-          <!-- Dropdown Trigger -->
-          <li><a class='dropdown-button' data-activates='dropdown1' data-constrainWidth="false" href="#">ACCESORIOS PARA INTERIOR</a>
-            <!-- Dropdown Structure -->
-            <ul id='dropdown1' class='dropdown-content'>
-              <li ng-repeat="item in groupList track by $index">
-                <a href="#!" ng-click="setGroupPublic(item)">{{ item }}</a>
-              </li>
-            </ul>
-          </li>
-          <li><a href="">ACCESORIOS PARA EXTERIOR</a></li>
-          <!-- <li><a href="como_comprar">¿Como comprar?</a></li>
-          <li><a href="#modalContact">Contacto</a></li> -->
-        </ul>
-        <ul class="side-nav" id="mobile-view">
-          <!-- <li><a href="/">Home</a></li> -->
-          <li ng-repeat="item in groupList track by $index">
-            <a href="#!">{{ item }}</a>
-          </li>
-          <!-- <li><a href="como_comprar">¿Como comprar?</a></li>
-          <li><a href="#modalContact">Contacto</a></li> -->
-        </ul>
-      </div>
-    </nav>
   </div>
+      
+<div id="navegador">
+  <ul>
+    <li ng-repeat="group in groupList track by $index">
+      <a href="#" ng-click="expand(group.groupname)">{{ group.groupname }}</a>
+    </li>
+  </ul>
+</div>
+
+
+  <div class="navSon" ng-show="showsubgroup" ng-init="false" >
+    <a href="search" ng-click="findbysubgroup(item)" ng-repeat="item in subGroupActiveList"> {{ item }}</a>
+  </div>
+
+
+  
 </header>
