@@ -246,6 +246,42 @@
     	</div>
     </div>
   </li>
+
+  <li>
+    <div class="collapsible-header"><i class="material-icons">photo</i>Imagen pie de pagina</div>
+    <div class="collapsible-body">
+			<div class="divinside">
+				
+
+					<div class="row">
+				    <form id="newParalexForm"  method="POST" action="/paralex" enctype="multipart/form-data" >
+				      <div class="row">
+				        
+								<div class="col s12">
+									<div class="file-field input-field">
+							      <div class="btn">
+							        <span>Foto</span>
+							        <input type="file" id="photoParalex" name="fieldphotoParalex">
+							      </div>
+							      <div class="file-path-wrapper">
+							        <input class="file-path validate" type="text" placeholder="Cargar una imagen" name="fieldphotoParalex" ng-model="photoParalex">
+							      </div>
+							    </div>
+								</div>
+								<div id="destinationParalex"></div>
+
+				        <div class="col s12 m4">
+				        	<button type="submit" class=" waves-light purple btn" ng-click="saveParalex(item_title, item_detail,photoParalex)" ng-show="btnItemSave"><i class="material-icons">save</i></a>
+				        </div>
+				      </div>
+				    </form>
+				  </div>
+
+				
+			</div>
+    </div>
+  </li>
+
 </ul>
 </div>
 
@@ -268,7 +304,7 @@
 		    	<input type="checkbox" id="Disponibles" ng-model="product.exist" ng-checked="true" />
       		<label for="Disponibles">Disponibles</label>
 		    </span>
- <br>
+ 				<br>
 		  </div>
 		 
 
@@ -447,10 +483,7 @@
 	  })
   }
 
-  // var dom_el = document.querySelector('[ng-controller="adminWeb"]');
-  // var ng_el = angular.element(dom_el);
-  // var ng_el_scope = ng_el.scope();
-  // var itemsSubGroup = ng_el_scope.itemsSubGroup;
+
 
   loadChips = function(itemsSubGroup){
   	console.log('habla '+ itemsSubGroup)
@@ -527,6 +560,32 @@ var fileCarrousel,
 			}
 
 			reader.readAsDataURL(fileCarrousel)
+		}
+
+})
+
+// upload img Paralex
+document.getElementById('photoParalex').addEventListener('change', function() {
+var fileParalex,
+		destination = document.getElementById('destinationParalex')
+		destination.innerHTML = ''
+
+	// Looping in case they uploaded multiple files
+		fileParalex = this.files[0]
+		console.log('fileParalex: ' +  JSON.stringify(fileParalex, null, 2))
+		if(fileParalex.type.indexOf('image') != -1) { // Very primitive "validation"
+
+			var reader = new FileReader()
+
+			reader.onload = function(e) {
+				var img = new Image()
+				img.src = e.target.result // File contents here
+				img.width = 180
+				img.style = "margin:10px"
+				destination.appendChild(img)
+			}
+
+			reader.readAsDataURL(fileParalex)
 		}
 
 })

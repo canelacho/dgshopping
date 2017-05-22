@@ -80,7 +80,7 @@ $scope.showProductLimitTo = 8
 	refreshGroupList = function() {
 		$http({ method:'GET', url:'/group' }).success(function(data,status,headers,config){
 			if(data){
-				// console.log(data)
+				console.log(data)
 				groupList = data
 				// console.log('group list actualizado a ' + groupList)
 				$scope.groupList = data
@@ -458,5 +458,6 @@ $scope.showProductLimitTo = 8
 
 	// Load page init
 	loadPage()
+	refreshGroupList()
 
 }])

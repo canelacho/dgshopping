@@ -47,6 +47,7 @@ require('./routes/routes_users')(app)
 require('./routes/routes_groupSubgroup')(app)
 require('./routes/routes_private')(app)
 require('./routes/routes_carrousel')(app)
+require('./routes/routes_paralex')(app)
 require('./routes/routes_search_subgroup')(app)
 
 
