@@ -7,7 +7,13 @@ module.exports = function(app) {
 
 	search_subgroup_items = function(req, res) {
 	
+	console.log(req.params)
+
 		product.find(function(err, products){
+
+			console.log('----------')
+			console.log(products)
+
 			//send an array!!!
 			if(!err) res.send([req.params, products])
 			else console.log('ERROR: ' + err)
@@ -16,5 +22,5 @@ module.exports = function(app) {
 	}
 
 	// API ROUTES
-	app.get('/search/:id', search_subgroup_items)
+	app.get('/searching/:id', search_subgroup_items)
 }

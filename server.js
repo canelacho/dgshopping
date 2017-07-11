@@ -2,14 +2,15 @@ var express = require('express'),
 		bodyParser = require('body-parser'),
 		methodOverride = require('method-override'),
 		mongoose = require('mongoose'),
-		port = 3000,
+		port = 3001,
 		cookieSession = require('cookie-session'),
 	  session_middleware = require("./middlewares/check_session");
 
-mongoose.connect('mongodb://localhost/dgshopping', function(err, res) {
+mongoose.connect('mongodb://localhost/dgshopping2', function(err, res) {
 	if(err) console.log('ERROR: Connecting to DB / ' + err)
 	else console.log('DB Connection, successfull')
 })
+
 
 var app = express()
 

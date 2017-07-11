@@ -1,6 +1,7 @@
 node_modules/*
-testKeyPair.pem
+*.pem
 dgshopping.pem
 querys.js
 .DS_Store
 public/img/*
+mongodbBackup/*

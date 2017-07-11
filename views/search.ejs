@@ -30,7 +30,7 @@
     <div class="row gallery-row">
 
 
-      <div ng-repeat="product in subgroupitemsfinded | filter: (product.subgroup = subgroupfinded )| filter: searchByName  | orderBy: ['-date','product.name'] track by $index" class="col s12 m4 l3 outstanding-product" ng-show="product.exist">
+      <div ng-repeat="product in subgroupitemsfinded | filter: (product.subgroup = subgroupfinded ) | filter: searchByName | orderBy: ['name','-date'] track by $index" class="col s12 m4 l3 outstanding-product" ng-show="product.exist">
 
         <div class="padre-watch-product">
           <img class="responsive-img" ng-src="../img/products/{{ product.photos[0] }}" alt="Imagen del producto">

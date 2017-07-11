@@ -63,10 +63,10 @@ app.controller('navController', ['$scope','$http','$window','$location', functio
 
 
 	$scope.findbysubgroup = function(subgroup){
-		console.log('el subgrupo a buscar ' +subgroup)
 
-		$http({method:'GET',url:'/search/'+subgroup}).success(function(data, status, headers, config){
+		$http({method:'GET',url:'/searching/'+subgroup}).success(function(data, status, headers, config){
 			if(data){
+
 				$scope.subgroupfinded = data[0].id
 				$scope.subgroupitemsfinded = data[1]
 			} else {
