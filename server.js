@@ -2,7 +2,7 @@ var express = require('express'),
 		bodyParser = require('body-parser'),
 		methodOverride = require('method-override'),
 		mongoose = require('mongoose'),
-		port = 3001,
+		port = 3000,
 		cookieSession = require('cookie-session'),
 	  session_middleware = require("./middlewares/check_session");
 
