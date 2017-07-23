@@ -62,11 +62,25 @@ app.controller('navController', ['$scope','$http','$window','$location', functio
 	}
 
 
-	$scope.findbysubgroup = function(subgroup){
+	// $scope.findbysubgroup = function(subgroup){
+
+	// 	$http({method:'GET',url:'/searching/'+subgroup}).success(function(data, status, headers, config){
+	// 		if(data){
+	// 			//window.location = '/search'
+	// 			$scope.subgroupfinded = data[0].id
+	// 			$scope.subgroupitemsfinded = data[1]
+	// 		} else {
+	// 			console.log('ERRR data')
+	// 		}
+	// 	})
+
+	// }
+
+	var findbysubgroup = function(subgroup){
 
 		$http({method:'GET',url:'/searching/'+subgroup}).success(function(data, status, headers, config){
 			if(data){
-
+				//window.location = '/search'
 				$scope.subgroupfinded = data[0].id
 				$scope.subgroupitemsfinded = data[1]
 			} else {
@@ -114,8 +128,25 @@ app.controller('navController', ['$scope','$http','$window','$location', functio
 		var url = $location.$$absUrl
 		var palabra = url.split("/")
 		palabra = palabra[palabra.length - 1]
-		console.log(palabra)
-		return palabra
+		busqueda = palabra.split("?")
+		objPalabra = {
+			palabra : palabra,
+			busqueda : busqueda
+		}
+		return objPalabra
 	}()
+
+	var limpiarCaracteres = function(palabraLimpiar) {
+		console.log(palabraLimpiar)
+		if (palabraLimpiar !== undefined ) {
+			var palabraLimpiar = (palabraLimpiar.split("%20").join(" "))
+			return palabraLimpiar
+		}
+		// var arg = palabraLimpiar.split(" ", 2)
+		
+	}
+
+	console.log(limpiarCaracteres(objPalabra.busqueda[1]))
+	findbysubgroup(objPalabra.busqueda[1])
 
 }])

@@ -9,16 +9,16 @@ module.exports = function(app) {
 	
 	console.log(req.params)
 
-		product.find(function(err, products){
+		product.find({ subgroup : req.params.id },function(err, products){
 
 			console.log('----------')
-			console.log(products)
-
+			//console.log(products)
 			//send an array!!!
-			if(!err) res.send([req.params, products])
+			if(!err) {
+				res.send([req.params, products])
+			}
 			else console.log('ERROR: ' + err)
 		})
-	
 	}
 
 	// API ROUTES

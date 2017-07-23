@@ -85,9 +85,8 @@
   </ul>
 </div>
 
-
   <div class="navSon" ng-show="showsubgroup" ng-init="false" >
-    <a href="search" ng-click="findbysubgroup(item)" ng-repeat="item in subGroupActiveList"> {{ item }}</a>
+    <a href="search?{{item}}" ng-repeat="item in subGroupActiveList"> {{ item }}</a>
   </div>
 
 
