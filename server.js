@@ -7,7 +7,7 @@ var express = require('express'),
 		cookieSession = require('cookie-session'),
 	  session_middleware = require("./middlewares/check_session");
 
-mongoose.connect('mongodb://localhost/dgshopping2', function(err, res) {
+mongoose.connect('mongodb://localhost/dgshopping', function(err, res) {
 	if(err) console.log('ERROR: Connecting to DB / ' + err)
 	else console.log('DB Connection, successfull')
 })
