@@ -6,8 +6,6 @@ module.exports = function(app) {
 // GET ALL by PARAM
 
 	search_subgroup_items = function(req, res) {
-	
-	console.log(req.params)
 
 		product.find({ subgroup : req.params.id },function(err, products){
 

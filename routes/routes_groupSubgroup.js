@@ -4,9 +4,12 @@ module.exports = function(app) {
 	// GET ALL
 	findGroups = function(req, res) {
 		group.find({}, function(err, groups) {
-			if(!err) console.log('Groups finded')
+			if(!err) { 
+				console.log('Groups finded')
+				res.send(groups)
+			}
 			else console.log('ERROR finding groups: ' + groups)
-			res.send(groups)
+			
 		})
 	}
 

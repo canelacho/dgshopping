@@ -124,7 +124,7 @@ app.controller('navController', ['$scope','$http','$window','$location', functio
 
 	}
 
-	$scope.markview = function(){
+	var markview = function(){
 		var url = $location.$$absUrl
 		var palabra = url.split("/")
 		palabra = palabra[palabra.length - 1]
@@ -147,6 +147,6 @@ app.controller('navController', ['$scope','$http','$window','$location', functio
 	}
 
 	//console.log(limpiarCaracteres(objPalabra.busqueda[1]))
-	findbysubgroup(objPalabra.busqueda[1])
+	findbysubgroup(markview.busqueda[1])
 
 }])
