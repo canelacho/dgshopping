@@ -137,7 +137,7 @@ app.controller('navController', ['$scope','$http','$window','$location', functio
 	}()
 
 	var limpiarCaracteres = function(palabraLimpiar) {
-		console.log(palabraLimpiar)
+		//console.log(palabraLimpiar)
 		if (palabraLimpiar !== undefined ) {
 			var palabraLimpiar = (palabraLimpiar.split("%20").join(" "))
 			return palabraLimpiar
@@ -146,7 +146,7 @@ app.controller('navController', ['$scope','$http','$window','$location', functio
 		
 	}
 
-	console.log(limpiarCaracteres(objPalabra.busqueda[1]))
+	//console.log(limpiarCaracteres(objPalabra.busqueda[1]))
 	findbysubgroup(objPalabra.busqueda[1])
 
 }])
