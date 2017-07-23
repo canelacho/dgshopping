@@ -2,6 +2,7 @@ var express = require('express'),
 		bodyParser = require('body-parser'),
 		methodOverride = require('method-override'),
 		mongoose = require('mongoose'),
+		morgan = require('morgan'),
 		port = 3000,
 		cookieSession = require('cookie-session'),
 	  session_middleware = require("./middlewares/check_session");
@@ -22,6 +23,7 @@ app.use(bodyParser.json())
 app.use(methodOverride('X-HTTP-Method-Override'))
 app.use(express.static('controllers'))
 app.use(express.static(__dirname + '/public'));
+app.use( morgan('dev') )
 app.use(cookieSession({
 	name: "session",
 	keys: ["stars", "wars"]
